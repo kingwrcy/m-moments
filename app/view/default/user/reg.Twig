@@ -1,0 +1,67 @@
+{% extends 'default/layout/base.Twig' %}
+{% block content %}
+	<div class="columns is-centered box">
+		<div class="column is-6">
+			<form action="/user/doReg" method="post">
+				<div class="field">
+					<label for="username" class="label">用户名</label>
+					<div class="control">
+						<input class="input" type="text" name="username" value="{{ data.username }}">
+					</div>
+					{{ field }}
+					{% if field == 'username' %}
+						<p class="help is-danger">{{ exception }}</p>
+					{% endif %}
+				</div>
+
+				<div class="field">
+					<label for="password" class="label">密码</label>
+					<div class="control">
+						<input class="input" type="password" name="password" value="{{ data.password }}">
+					</div>
+					{% if field == 'password' %}
+						<p class="help is-danger">{{ exception }}</p>
+					{% endif %}
+				</div>
+
+				<div class="field">
+					<label for="repeatPassword" class="label">重复密码</label>
+					<div class="control">
+						<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
+					</div>
+					{% if field == 'repeatPassword' %}
+						<p class="help is-danger">{{ exception }}</p>
+					{% endif %}
+				</div>
+
+
+				<div class="field">
+					<label for="email" class="label">邮箱</label>
+					<div class="control">
+						<input class="input" type="text" name="email" value="{{ data.email }}">
+					</div>
+					{% if field == 'email' %}
+						<p class="help is-danger">{{ exception }}</p>
+					{% endif %}
+
+				</div>
+
+
+				<div class="field is-grouped">
+					<div class="control">
+						<button class="button is-link ">
+							<span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+							<span>注册用户</span>
+						</button>
+
+						<a class="button is-light " href="/user/login">去登录</a>
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+{% endblock %}

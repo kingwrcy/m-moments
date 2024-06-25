@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    {% include 'default/layout/header.Twig' %}
+</head>
+<body>
+<div class="container is-max-desktop">
+    {% include 'default/layout/nav.Twig' %}
+    {% block content %} {% endblock %}
+    {% include 'default/layout/footer.Twig' %}
+</div>
+
+</body>
+</html>
