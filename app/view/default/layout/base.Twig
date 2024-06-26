@@ -4,16 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {% endblock %}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     {% include 'default/layout/header.Twig' %}
+    {% block beforeScript %} {% endblock %}
+    <style>
+        [un-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container is-max-desktop">
+<div class="container is-max-desktop" un-cloak>
     {% include 'default/layout/nav.Twig' %}
     {% block content %} {% endblock %}
     {% include 'default/layout/footer.Twig' %}
 </div>
-
+{% block afterScript %} {% endblock %}
 </body>
 </html>

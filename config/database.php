@@ -12,4 +12,21 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-return [];
+return [
+	'default' => 'pgsql',
+	'connections' => [
+		'pgsql' => [
+			'driver'   => 'pgsql',
+			'host'     => '172.19.208.1',
+			'port'     => 5432,
+			'database' => 'moments',
+			'username' => 'postgres',
+			'password' => 'a123456',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+			'schema'   => 'public',
+			'sslmode'  => 'prefer',
+		],
+	]
+
+];

@@ -13,11 +13,20 @@
  */
 
 use app\controller\IndexController;
+use app\controller\MemoController;
 use app\controller\UserController;
 use Webman\Route;
 
 Route::get('/user/login', [UserController::class, 'login']);
+Route::post('/user/doLogin', [UserController::class, 'doLogin']);
+Route::post('/user/doReg', [UserController::class, 'doReg']);
 Route::get('/user/reg', [UserController::class, 'reg']);
+Route::get('/user/logout', [UserController::class, 'logout']);
+
+
+
+Route::get('/memo/add', [MemoController::class, 'add']);
+Route::post('/memo/save', [MemoController::class, 'save']);
 
 
 

@@ -8,8 +8,7 @@
 					<div class="control">
 						<input class="input" type="text" name="username" value="{{ data.username }}">
 					</div>
-					{{ field }}
-					{% if field == 'username' %}
+					{% if exception starts with '用户名' %}
 						<p class="help is-danger">{{ exception }}</p>
 					{% endif %}
 				</div>
@@ -19,7 +18,7 @@
 					<div class="control">
 						<input class="input" type="password" name="password" value="{{ data.password }}">
 					</div>
-					{% if field == 'password' %}
+					{% if exception starts with '密码' %}
 						<p class="help is-danger">{{ exception }}</p>
 					{% endif %}
 				</div>
@@ -29,7 +28,7 @@
 					<div class="control">
 						<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
 					</div>
-					{% if field == 'repeatPassword' %}
+					{% if exception starts with '重复密码' %}
 						<p class="help is-danger">{{ exception }}</p>
 					{% endif %}
 				</div>
@@ -40,12 +39,15 @@
 					<div class="control">
 						<input class="input" type="text" name="email" value="{{ data.email }}">
 					</div>
-					{% if field == 'email' %}
+					{% if exception starts with '邮箱' %}
 						<p class="help is-danger">{{ exception }}</p>
 					{% endif %}
 
 				</div>
 
+				{% if message %}
+					<div class="block has-text-success">{{ message }}</div>
+				{% endif %}
 
 				<div class="field is-grouped">
 					<div class="control">
