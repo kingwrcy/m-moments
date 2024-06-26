@@ -1,4 +1,4 @@
-<nav class="navbar block" role="navigation" aria-label="main navigation">
+<nav class="navbar block px-4" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="https://bulma.io">
 			<svg width="640" height="160" viewBox="0 0 640 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,16 +28,26 @@
 				<span>广场</span>
 			</a>
 
-			<a class="navbar-item">
-				热门
+			<a class="navbar-item icon-text">
+				<span class="icon is-small">
+					<img src="/icons/hot.svg" alt="">
+				</span>
+				<span>热门</span>
 			</a>
 			{% if currentUser %}
-				<a class="navbar-item">
-					我的
+				<a class="navbar-item icon-text">
+					<span class="icon is-small">
+						<img src="/icons/mine.svg" alt="">
+					</span>
+					<span>我的</span>
 				</a>
-				<a class="navbar-item" href="/memo/add">
+				<a class="navbar-item icon-text" href="/memo/add">
+					<span class="icon is-small">
+						<img src="/icons/add.svg" alt="">
+					</span>
 					<span>发言</span>
 				</a>
+
 			{% endif %}
 		</div>
 

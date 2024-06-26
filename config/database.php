@@ -17,7 +17,7 @@ return [
 	'connections' => [
 		'pgsql' => [
 			'driver'   => 'pgsql',
-			'host'     => '172.19.208.1',
+			'host'     => 'localhost',
 			'port'     => 5432,
 			'database' => 'moments',
 			'username' => 'postgres',

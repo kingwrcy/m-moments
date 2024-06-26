@@ -21,7 +21,7 @@ class IndexController {
 	public function index(Request $request): Response {
 		$per_page = 10;
 		$current_page = $request->input('page', 1);
-		$memos = Memo::paginate($per_page, ['*'], 'page', $current_page);
+		$memos = Memo::orderBy("created_at","desc")->paginate($per_page, ['*'], 'page', $current_page);
 
 		return view('default/index',[
 			'memos' => $memos,
