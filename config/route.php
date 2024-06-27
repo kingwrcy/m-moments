@@ -34,7 +34,7 @@ Route::get('/memo/add', [MemoController::class, 'add']);
 Route::post('/memo/save', [MemoController::class, 'save']);
 Route::get('/memo/edit/{id}', [MemoController::class, 'toEdit']);
 Route::get('/memo/remove/{id}', [MemoController::class, 'remove']);
-Route::get('/memo/like/{id}', [MemoController::class, 'like']);
+Route::post('/memo/like/{id}', [MemoController::class, 'like']);
 Route::post('/memo/comment/{id}', [MemoController::class, 'comment']);
 
 

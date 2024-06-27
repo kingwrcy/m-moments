@@ -9,7 +9,7 @@ use Twig\TwigFilter;
 return [
 	'handler' => Twig::class,
 	'extension' => function (Environment $twig) {
-		$twig->addExtension(new CustomRawFilterExtension());
+//		$twig->addExtension(new CustomRawFilterExtension());
 		$twig->addFilter(new TwigFilter('timeAgo', 'timeAgo'));
 	},
 	'options' => [

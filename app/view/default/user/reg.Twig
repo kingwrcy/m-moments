@@ -35,7 +35,7 @@
 		<div class="field">
 			<label for="email" class="label">邮箱</label>
 			<div class="control">
-				<input class="input" type="text" name="email" value="{{ data.email }}">
+				<input placeholder="会用来生成头像,请填写常用邮箱" class="input" type="text" name="email" value="{{ data.email }}">
 			</div>
 			{% if exception starts with '邮箱' %}
 				<p class="help is-danger">{{ exception }}</p>

@@ -125,6 +125,7 @@ class UserController {
 			'password' => password_hash($data['password'], PASSWORD_BCRYPT),
 			'email' => $data['email'],
 			'nickname' => $data['username'],
+            'avatar_url' => getenv('DEFAULT_USER_AVATAR_CDN'). hash("sha256", $data['email']),
 		]);
 
 		return view('default/user/reg', ['message' => '注册成功,快去登录吧！']);
