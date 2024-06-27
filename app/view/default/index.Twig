@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div class="is-centered ">
-		<div class="flex flex-col ">
+		<div class="flex flex-col divide-y divide-[#C0BEBF]/10 divide-solid">
 			{% for memo in memos %}
 				{% include 'default/component/memo.Twig' %}
 			{% endfor %}
@@ -11,22 +11,48 @@
 {% endblock %}
 
 {% block afterScript %}
+	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css"/>
 	<script>
-      $(function () {
 
-          $(document.body).on('click', function (event) {
-              const $target = $(event.target); // 获取被点击的元素
-							const $trigger = $($target.closest('[data-trigger]'))
-		          const $triggerItem = $($target.closest('[data-trigger-item]'))
-              if ($trigger.length > 0) {
-                  $("div[data-trigger-item]").hide()
-                  $($trigger).next().toggle()
-              }else if ($triggerItem.length > 0) {
-                  $($triggerItem).hide();
-              }else{
-                  $("div[data-trigger-item]").hide()
-              }
-          })
+    $(function () {
+
+      //评论工具栏
+      $("div[data-trigger-comment]").click(function () {
+        const id = $(this).data('trigger-comment')
+        const $target = $("form[data-comment-box='" + id + "']")
+        $("form[data-comment-box]").removeClass('flex').addClass('hidden');
+        if ($target.hasClass('flex')) {
+          $target.removeClass('flex').addClass('hidden')
+        } else {
+          $target.removeClass('hidden').addClass('flex')
+        }
       })
+
+
+      // markdown解析
+      $("div[data-content]").each(function (index) {
+        new toastui.Editor({
+          el: $(this).get(0),
+          initialValue: $(this).data('content')
+        });
+        $(this).attr('data-content', '')
+      })
+
+      // 互动工具栏
+      $(document.body).on('click', function (event) {
+        const $target = $(event.target); // 获取被点击的元素
+        const $trigger = $($target.closest('[data-trigger]'))
+        const $triggerItem = $($target.closest('[data-trigger-item]'))
+        if ($trigger.length > 0) {
+          $("div[data-trigger-item]").hide()
+          $($trigger).next().toggle()
+        } else if ($triggerItem.length > 0) {
+          $($triggerItem).hide();
+        } else {
+          $("div[data-trigger-item]").hide()
+        }
+      })
+    })
 	</script>
 {% endblock %}

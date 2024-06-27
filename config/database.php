@@ -17,11 +17,11 @@ return [
 	'connections' => [
 		'pgsql' => [
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'port'     => 5432,
-			'database' => 'moments',
-			'username' => 'postgres',
-			'password' => 'a123456',
+			'host'        => getenv('DB_HOST'),
+			'port'        => getenv('DB_PORT'),
+			'database'    => getenv('DB_NAME'),
+			'username'    => getenv('DB_USER'),
+			'password'    => getenv('DB_PASSWORD'),
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

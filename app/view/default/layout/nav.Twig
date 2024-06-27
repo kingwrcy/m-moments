@@ -34,6 +34,7 @@
 				</span>
 				<span>热门</span>
 			</a>
+
 			{% if currentUser %}
 				<a class="navbar-item icon-text">
 					<span class="icon is-small">
@@ -47,29 +48,42 @@
 					</span>
 					<span>发言</span>
 				</a>
-
+				<a class="navbar-item icon-text" href="/user/settings">
+				<span class="icon is-small">
+					<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"
+					                                                                                        stroke="currentColor"
+					                                                                                        stroke-linecap="round"
+					                                                                                        stroke-linejoin="round"
+					                                                                                        stroke-width="2"><path
+									d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065"/><path
+									d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/></g></svg>
+				</span>
+				</a>
 			{% endif %}
 		</div>
 
 		<div class="navbar-end">
-
+			{% if not currentUser %}
 			<div class="navbar-item">
 				<div class="buttons">
-					{% if not currentUser %}
+
 						<a class="button" href="/user/reg">
 							<strong>注册</strong>
 						</a>
 						<a class="button is-light" href="/user/login">
 							登录
 						</a>
-					{% else %}
-
-						<a class="button" href="/user/logout">
-							<strong>登出</strong>
-						</a>
-					{% endif %}
 				</div>
 			</div>
+					{% else %}
+						<a class="navbar-item icon-text" href="/user/logout">
+							<span class="icon is-small">
+							<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path
+										fill="currentColor"
+										d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"/></svg>
+							</span>
+						</a>
+					{% endif %}
 		</div>
 	</div>
 </nav>

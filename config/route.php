@@ -14,6 +14,7 @@
 
 use app\controller\IndexController;
 use app\controller\MemoController;
+use app\controller\UploadController;
 use app\controller\UserController;
 use Webman\Route;
 
@@ -22,11 +23,19 @@ Route::post('/user/doLogin', [UserController::class, 'doLogin']);
 Route::post('/user/doReg', [UserController::class, 'doReg']);
 Route::get('/user/reg', [UserController::class, 'reg']);
 Route::get('/user/logout', [UserController::class, 'logout']);
+Route::get('/user/settings', [UserController::class, 'settings']);
+Route::post('/user/saveSettings', [UserController::class, 'saveSettings']);
+
+Route::get('/upload/[{file:.+}]', [UploadController::class, 'file']);
 
 
 
 Route::get('/memo/add', [MemoController::class, 'add']);
 Route::post('/memo/save', [MemoController::class, 'save']);
+Route::get('/memo/edit/{id}', [MemoController::class, 'toEdit']);
+Route::get('/memo/remove/{id}', [MemoController::class, 'remove']);
+Route::get('/memo/like/{id}', [MemoController::class, 'like']);
+Route::post('/memo/comment/{id}', [MemoController::class, 'comment']);
 
 
 

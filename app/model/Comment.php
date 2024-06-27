@@ -4,20 +4,14 @@ namespace app\model;
 
 use support\Model;
 
-class User extends Model {
+class Comment extends Model {
 	protected $guarded = ['id'];
-
-	protected $hidden = ['password'];
-
-	protected $casts = [
-		'config' => 'array', // 将 JSON 字段转换为 PHP 数组
-	];
 	/**
 	 * The table associated with the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 't_users';
+	protected $table = 't_comments';
 
 	/**
 	 * The primary key associated with the table.
@@ -33,7 +27,11 @@ class User extends Model {
 	 */
 	public $timestamps = true;
 
-	public function memos() {
-		return $this->hasMany('app\model\Memo','user_id','id');
+	public function author() {
+		return $this->belongsTo('app\model\User','user_id','id');
+	}
+
+	public function memo() {
+		return $this->belongsTo('app\model\Memo','memo_id','id');
 	}
 }

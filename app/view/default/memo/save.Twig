@@ -1,0 +1,75 @@
+{% extends 'default/layout/base.Twig' %}
+
+{% block content %}
+	<div class="box">
+		<form action="/memo/save" method="post">
+			<input type="hidden" name="id" value="{{ data.id }}">
+			<div class="field">
+				<div class="control">
+					<input id="content" type="hidden" name="content" value="{{ data.content }}"/>
+					<div id="editor"></div>
+				</div>
+				{% if exception starts with '内容' %}
+					<p class="help is-danger">{{ exception }}</p>
+				{% endif %}
+			</div>
+			<div class="field is-grouped">
+				<div class="control">
+					<button class="button is-link">
+						<span>发言</span>
+					</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+{% endblock %}
+
+{% block beforeScript %}
+	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	<script src="https://uicdn.toast.com/editor/latest/i18n/zh-cn.js"></script>
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
+{% endblock %}
+
+{% block afterScript %}
+	<script>
+    const editor = new toastui.Editor({
+      el: document.querySelector('#editor'),
+      initialEditType: 'wysiwyg',
+      hideModeSwitch: true,
+      language: 'zh-CN',
+      initialValue: `{{ data.content }}`,
+      events: {
+        change: function () {
+          document.querySelector("#content").value = editor.getMarkdown();
+        }
+      },
+      hooks: {
+        addImageBlobHook: function (blob, callback) {
+          Toastify({
+            text: "功能暂未实现",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true,
+          }).showToast();
+          // const formData = new FormData();
+          // formData.append('image', blob);
+          // fetch('/memo/uploadImage', {
+          // 		method: 'POST',
+          // 		body: formData
+          // }).then(response => {
+          // 		if(response.ok){
+          // 				response.json().then(data => {
+          // 						callback(data.url);
+          // 				});
+          // 		}
+          // });
+        }
+      }
+    });
+	</script>
+{% endblock %}

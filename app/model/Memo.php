@@ -30,4 +30,9 @@ class Memo extends Model {
 	public function author() {
 		return $this->belongsTo('app\model\User','user_id','id');
 	}
+
+
+	public function comments() {
+		return $this->hasMany('app\model\Comment','memo_id','id');
+	}
 }

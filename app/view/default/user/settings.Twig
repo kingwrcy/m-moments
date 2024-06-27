@@ -1,0 +1,185 @@
+{% extends 'default/layout/base.Twig' %}
+{% block content %}
+	<form action="/user/saveSettings" method="post" class="px-10 py-4" enctype="multipart/form-data">
+		<div class="field">
+			<label for="avatar" class="label is-small">头像</label>
+			<div class="control">
+				<div class="file is-small">
+					<label class="file-label">
+						<input class="file-input is-small" name="avatar_url" type="file"/>
+						<span class="file-cta">
+				      <span class="file-label"> 上传本地文件 </span>
+				    </span>
+					</label>
+				</div>
+				<input class="input is-small my-2" name="avatar_url" value="{{ data.avatar_url }}" type="text"
+				       placeholder="或者使用在线地址">
+			</div>
+
+			<figure class="image avatar w-16 h-16 my-2 ">
+				<img src="{{ data.avatar_url }}" class="rounded" id="avatar_url"/>
+			</figure>
+		</div>
+		<div class="field">
+			<label for="cover_url" class="label is-small">顶部图片</label>
+			<div class="control">
+				<div class="file is-small">
+					<label class="file-label">
+						<input class="file-input is-small" type="file" name="cover_url"/>
+						<span class="file-cta">
+				      <span class="file-label"> 上传本地文件 </span>
+				    </span>
+					</label>
+				</div>
+				<input class="input is-small my-2" type="text" name="cover_url" value="{{ data.cover_url }}"
+				       placeholder="或者使用在线地址">
+			</div>
+			<figure class="image w-full max-h-[300px] my-2">
+				<img src="{{ data.cover_url }}" class="rounded" id="cover_url"/>
+			</figure>
+		</div>
+		<div class="field">
+			<label for="username" class="label is-small">用户名</label>
+			<div class="control">
+				<input class="input is-small" type="text" name="username" value="{{ data.username }}">
+			</div>
+		</div>
+		<div class="field">
+			<label for="nickname" class="label is-small">昵称</label>
+			<div class="control">
+				<input class="input is-small" type="text" name="nickname" value="{{ data.nickname }}">
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="slogan" class="label is-small">心情状态</label>
+			<div class="control">
+				<input class="input is-small" type="text" name="slogan" value="{{ data.slogan }}">
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="password" class="label is-small">密码</label>
+			<div class="control">
+				<input class="input is-small" type="password" name="password" placeholder="不修改留空,修改密码需要重新登录">
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="email" class="label is-small">邮箱</label>
+			<div class="control">
+				<input class="input is-small" type="text" name="email" value="{{ data.email }}">
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="css" class="label is-small">自定义CSS</label>
+			<div class="control">
+				<textarea class="textarea is-small" name="css">{{ data.config.css }}</textarea>
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="js" class="label is-small">自定义JS</label>
+			<div class="control">
+				<textarea class="textarea is-small" name="js">{{ data.config.js }}</textarea>
+			</div>
+		</div>
+
+		<section>
+			<div class="mb-2 flex justify-between items-center cursor-pointer" id="toggleS3Btn">
+				<h2 class="font-bold ">S3相关配置</h2>
+				<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+				     viewBox="0 0 32 32">
+					<path d="M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z" fill="currentColor"></path>
+				</svg>
+			</div>
+			<div class="p-4 border rounded border-gray-300 border-solid hidden" id="s3Config">
+				<div class="field">
+					<label for="s3_key" class="label is-small">Access Key</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="ak" value="{{ data.config.ak }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="s3_secret" class="label is-small">Secret Key</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="sk" value="{{ data.config.sk }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="s3_secret" class="label is-small">域名</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="domain" value="{{ data.config.domain }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="endpoint" class="label is-small">S3 Endpoint</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="endpoint" value="{{ data.config.endpoint }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="bucket" class="label is-small">桶名称</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="bucket" value="{{ data.config.bucket }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="suffix" class="label is-small">后缀</label>
+					<div class="control">
+						<input class="input is-small" type="text" name="suffix" value="{{ data.config.suffix }}">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{% if message %}
+			<div class="block has-text-danger">{{ message }}</div>
+		{% endif %}
+
+		<div class="field my-2">
+			<div class="control">
+				<button class="button is-link is-small">
+					<span>保存设置</span>
+				</button>
+			</div>
+
+		</div>
+
+	</form>
+{% endblock %}
+
+{% block afterScript %}
+	<script>
+
+    const readImage = (file, callback) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        callback(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    };
+
+    const fileChanged = (name) =>{
+
+    }
+
+    $(function () {
+      $("#toggleS3Btn").click(() => {
+        $("#s3Config").toggle()
+      })
+
+	    $("input[type=file]").change(function () {
+				const file = this.files[0];
+        const name = $(this).attr('name')
+				if (!file) {
+					return;
+				}
+				readImage(file, (url) => {
+					$("#"+name).attr("src", url);
+				});
+			});
+    })
+	</script>
+{% endblock %}
