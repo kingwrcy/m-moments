@@ -1,4 +1,4 @@
-<div class="memo p-4 flex gap-4 flex-row text-sm border-x-0">
+<div class="memo p-4 flex gap-4 flex-row border-x-0">
 
 	<img src="{{ memo.author.avatar_url }}" alt="" class="avatar w-12 h-12 rounded cursor-pointer">
 	<div class="flex flex-col flex-1">
@@ -6,7 +6,7 @@
 			{{ memo.author.nickname }}
 		</div>
 
-		<div class="text-wrap break-all line-clamp-4" data-content="{{ memo.content }}">
+		<div class="text-wrap break-all line-clamp-10" data-content="{{ memo.content }}">
 		</div>
 
 		<div class="flex justify-between relative items-center">
@@ -91,7 +91,7 @@
 					<path
 							d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
 				</svg>
-				<div class="text-[#576b95]">
+				<div class="text-[#576b95] text-sm">
 					<span data-like-persons>
 					{% for like in memo.likes %}
 						<a class="text-[#576b95] dark:text-white"
@@ -113,7 +113,7 @@
 			</form>
 
 			{% if not memo.comments is empty %}
-				<div class="flex gap-2 flex-col mt-2">
+				<div class="flex gap-2 flex-col mt-2 text-sm">
 					{% for comment in memo.comments %}
 						<div class=" cursor-pointer no-wrap" data-trigger-comment="{{ memo.id~'x'~comment.id }}">
 							<img
