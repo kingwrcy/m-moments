@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %} {% endblock %}</title>
+	<link rel="shortcut icon" type="image/png" href="{{ sysConfig.favicon }}">
 	<script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -22,6 +23,13 @@
 
       [un-cloak] {
           display: none;
+      }
+      .toastui-editor-contents pre{
+		      border-radius: 5px !important;
+      }
+      .toastui-editor-contents pre code{
+		      font-size:14px !important;
+
       }
 	</style>
 	{% if currentUser and currentUser.config.css %}

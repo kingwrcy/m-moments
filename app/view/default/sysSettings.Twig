@@ -1,4 +1,6 @@
 {% extends 'default/layout/base.Twig' %}
+{% block title %} 系统设置 {% endblock %}
+
 {% block content %}
 	<form action="/saveSettings" method="post" class="px-10 py-4" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="{{ data.id }}">

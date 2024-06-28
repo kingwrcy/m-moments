@@ -1,4 +1,4 @@
-<nav class="navbar block px-4" role="navigation" aria-label="main navigation">
+<nav class="navbar px-4" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="/">
 			<svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -50,14 +50,12 @@
 				</span>
 				<span>广场</span>
 			</a>
-
 			<a class="navbar-item icon-text" href="/hot">
 				<span class="icon is-small">
 					<img src="/icons/hot.svg" alt="">
 				</span>
 				<span>热门</span>
 			</a>
-
 			{% if currentUser %}
 			<a class="navbar-item icon-text" href="/user/{{ currentUser.username }}">
 					<span class="icon is-small">
@@ -71,14 +69,15 @@
 					</span>
 				<span>发言</span>
 			</a>
-
 		</div>
 
-		<div class=" navbar-end">
+
+
+		<div class="navbar-end">
 			{% if currentUser %}
 				{% if currentUser.id == 1 %}
-					<a class="navbar-item icon-text" href="/sysSettings">
-						<span class="icon is-small">
+					<a class="navbar-item " href="/settings">
+						<span class="icon w-5 h-5">
 							<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"
 							                                                                                        stroke="currentColor"
 							                                                                                        stroke-linecap="round"
@@ -98,9 +97,9 @@
 				<div class="navbar-item">
 					<div class="buttons">
 						{% if  sysConfig.config.disable_register != "on" %}
-						<a class="button" href="/user/reg">
-							<strong>注册</strong>
-						</a>
+							<a class="button" href="/user/reg">
+								<strong>注册</strong>
+							</a>
 						{% endif %}
 						<a class="button is-light" href="/user/login">
 							登录
@@ -118,5 +117,7 @@
 			{% endif %}
 
 		</div>
+
+
 	</div>
 </nav>

@@ -1,4 +1,5 @@
 {% extends 'default/layout/base.Twig' %}
+{% block title %} 注册用户 {% endblock %}
 {% block content %}
 	{% if  sysConfig.config.disable_register != "on" %}
 		<form action="/user/doReg" method="post" class="px-10 py-4">
