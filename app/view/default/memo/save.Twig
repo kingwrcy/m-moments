@@ -15,10 +15,10 @@
 			</div>
 			<div class="field is-grouped">
 				<div class="control">
-					<button class="button is-link">
+					<button class="button is-link is-small">
 						<span>发言</span>
 					</button>
-					<button class="button" onclick="location.href='/'">
+					<button class="button is-small" onclick="location.href='/'">
 						<span>返回</span>
 					</button>
 				</div>
@@ -38,10 +38,10 @@
 	<script>
     const editor = new toastui.Editor({
       el: document.querySelector('#editor'),
-      initialEditType: 'wysiwyg',
+      initialEditType: 'markdown',
       hideModeSwitch: true,
       language: 'zh-CN',
-      initialValue: `{{ data.content }}`,
+      initialValue:document.querySelector("#content").value,
       events: {
         change: function () {
           document.querySelector("#content").value = editor.getMarkdown();
