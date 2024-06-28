@@ -83,7 +83,7 @@ class UserController {
 			'config' => [
 				'css' => $data['css'],
 				'js' => $data['js'],
-				'selfHomePage' => $data['selfHomePage'],
+				'selfHomePage' => $data['selfHomePage'] ?? "off"
 			],
 		]);
 
