@@ -57,20 +57,21 @@
 				<span>热门</span>
 			</a>
 			{% if currentUser %}
-			<a class="navbar-item icon-text" href="/user/{{ currentUser.username }}">
+				<a class="navbar-item icon-text" href="/user/{{ currentUser.username }}">
 					<span class="icon is-small">
 						<img src="/icons/mine.svg" alt="">
 					</span>
-				<span>我的</span>
-			</a>
-			<a class="navbar-item icon-text" href="/memo/add">
+					<span>我的</span>
+				</a>
+				<a class="navbar-item icon-text" href="/memo/add">
 					<span class="icon is-small">
 						<img src="/icons/add.svg" alt="">
 					</span>
-				<span>发言</span>
-			</a>
-		</div>
+					<span>发言</span>
+				</a>
+			{% endif %}
 
+		</div>
 
 
 		<div class="navbar-end">
@@ -92,16 +93,12 @@
 					<img src="{{ currentUser.avatar_url }}" class="h-10 rounded"/>
 				</a>
 			{% endif %}
-			{% endif %}
+
+
 			{% if not currentUser %}
 				<div class="navbar-item">
 					<div class="buttons">
-						{% if  sysConfig.config.disable_register != "on" %}
-							<a class="button" href="/user/reg">
-								<strong>注册</strong>
-							</a>
-						{% endif %}
-						<a class="button is-light" href="/user/login">
+						<a class="button" href="/user/login">
 							登录
 						</a>
 					</div>

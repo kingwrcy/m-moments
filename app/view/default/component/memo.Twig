@@ -7,7 +7,7 @@
 			{{ memo.author.nickname }}
 		</a>
 
-		<div class="text-wrap break-all line-clamp-10 max-h-[400px] overflow-hidden" data-content="{{ memo.content }}">
+		<div class="text-wrap break-all line-clamp-10 max-h-[400px] overflow-hidden markdown-body" data-content="{{ memo.content }}">
 		</div>
 
 		<div class="flex justify-between relative items-center">
@@ -129,11 +129,12 @@
 							{% endif %}
 
 							{% if comment.reply_username %}
-								<span class="mx-1 text-xs">回复</span>
+								<span class="text-sm">回复</span>
 								<span class="text-[#576b95] dark:text-white">{{ comment.reply_username }}</span>
 							{% endif %}
 							<span>:</span>
 							<span class="dark:text-white {{ currentUser? 'cursor-pointer':''}}">{{ comment.content }}</span>
+							<span class="text-sm text-gray-400 text-xs">{{ comment.created_at|timeAgo }}</span>
 						</div>
 						{% if currentUser %}
 						<form class="gap-4 flex-col hidden" data-comment-box="{{ memo.id~'x'~comment.id }}" method="post"
@@ -143,11 +144,11 @@
 							<textarea class="textarea is-small" name="content"
 							          placeholder="回复给@{{ comment.author.nickname ?: comment.username }}"></textarea>
 							<div class="flex flex-row gap-2">
-								{% if not currentUser %}
-									<input class="input is-small" name="username" placeholder="昵称"/>
-									<input class="input is-small" name="email" placeholder="邮箱"/>
-									<input class="input is-small" name="website" placeholder="网站"/>
-								{% endif %}
+{#								{% if not currentUser %}#}
+{#									<input class="input is-small" name="username" placeholder="昵称"/>#}
+{#									<input class="input is-small" name="email" placeholder="邮箱"/>#}
+{#									<input class="input is-small" name="website" placeholder="网站"/>#}
+{#								{% endif %}#}
 								<button class="button is-small" type="submit">评论</button>
 							</div>
 						</form>

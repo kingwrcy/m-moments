@@ -92,20 +92,17 @@ $(function () {
 
 
     setTimeout(() => {
-        console.log('111111111111')
         $(".toastui-editor-contents pre code").each(function () {
             const $pre = $(this).parent()
             const copyBtn = $(`<button class="text-xs px-2 py-1 shadow top-2 right-2 absolute bg-white rounded hidden">复制</button>`)
             $pre.css("position", "relative")
             $pre.append(copyBtn).hover(()=>{
-                copyBtn.text('复制').toggle()
+                copyBtn.removeClass('text-gray-300').text('复制').toggle()
             })
             copyBtn.bind('click',()=>{
+                copyBtn.addClass('text-gray-300').text('已复制!')
                 copyToClipboard($pre.find("code").text())
-                copyBtn.text('已复制!')
             })
-
-
         })
     }, 1000)
 })

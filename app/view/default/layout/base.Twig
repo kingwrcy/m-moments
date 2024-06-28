@@ -10,36 +10,17 @@
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 	{% include 'default/layout/header.Twig' %}
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/md.css">
 	{% block beforeScript %} {% endblock %}
-	<style>
-      * {
-          font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
-      }
-
-      html, body {
-          width: 100%;
-          height: 100%;
-      }
-
-      [un-cloak] {
-          display: none;
-      }
-      .toastui-editor-contents pre{
-		      border-radius: 5px !important;
-      }
-      .toastui-editor-contents pre code{
-		      font-size:14px !important;
-
-      }
-	</style>
 	{% if currentUser and currentUser.config.css %}
 		<style>
 			{{ currentUser.config.css }}
 		</style>
 	{% endif %}
 </head>
-<body class="bg-[#f1f5f9] dark:bg-slate-800 rounded-md dark:text-[#C0BEBF]">
-<div class="lg:w-[567px] mx-auto shadow-2xl bg-white dark:bg-[#181818]" un-cloak>
+<body class="bg-[#f1f5f9] dark:bg-slate-800 rounded-md dark:text-[#C0BEBF] flex flex-col">
+<div class="lg:w-[567px] mx-auto shadow-2xl bg-white dark:bg-[#181818] flex-1" un-cloak>
 	{% if currentUser and currentUser.config.selfHomePage == "on" and path == '/' %}
 	{% else %}
 		{% include 'default/layout/nav.Twig' %}

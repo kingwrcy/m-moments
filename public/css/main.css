@@ -1,0 +1,40 @@
+* {
+    font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
+}
+
+:root{
+    --bulma-body-font-size:14px;
+}
+
+html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+[un-cloak] {
+    display: none;
+}
+.toastui-editor-contents pre{
+    border-radius: 5px !important;
+    background-color: #f4f4f5 !important;
+}
+.toastui-editor-contents pre>code{
+    font-size:14px !important;
+    color:#71717a;
+}
+
+.toastui-editor-contents p>code{
+    background-color:#64748b;
+    color:white;
+    padding:2px 6px;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    margin:0 2px;
+}
+.toastui-editor-contents a{
+    margin:0 3px !important;
+}
+.toastui-editor-contents a:hover{
+    text-decoration: none !important;
+}
