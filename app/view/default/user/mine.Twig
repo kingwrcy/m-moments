@@ -1,0 +1,24 @@
+{% extends 'default/layout/base.Twig' %}
+
+{% block content %}
+	<div class="header relative mb-8"><img class="header-img w-full"
+	                                       src="{{ user.cover_url }}"
+	                                       alt="">
+		<div class="absolute right-2 bottom-[-40px]">
+			<div class="userinfo flex flex-col">
+				<div class="flex flex-row items-center gap-4 justify-end">
+					<div class="username text-lg font-bold text-white">Jerry</div>
+					<img src="{{ user.avatar_url }}"
+					     class="avatar w-[70px] h-[70px] rounded-xl"></div>
+				<div class="slogon text-gray truncate w-full text-end text-xs mt-2">{{ user.slogan }}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex flex-col divide-y divide-[#C0BEBF]/10 divide-solid">
+		{% for memo in memos %}
+			{% include 'default/component/memo.Twig' %}
+		{% endfor %}
+	</div>
+
+{% endblock %}

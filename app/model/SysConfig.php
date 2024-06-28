@@ -4,14 +4,17 @@ namespace app\model;
 
 use support\Model;
 
-class Memo extends Model {
+class SysConfig extends Model {
+	protected $casts = [
+		'config' => 'array', // 将 JSON 字段转换为 PHP 数组
+	];
 	protected $guarded = ['id'];
 	/**
 	 * The table associated with the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 't_memos';
+	protected $table = 't_sys_config';
 
 	/**
 	 * The primary key associated with the table.
@@ -27,16 +30,4 @@ class Memo extends Model {
 	 */
 	public $timestamps = true;
 
-	public function author() {
-		return $this->belongsTo('app\model\User','user_id','id');
-	}
-
-
-	public function comments() {
-		return $this->hasMany('app\model\Comment','memo_id','id');
-	}
-
-	public function likes() {
-		return $this->hasMany('app\model\Like','memo_id','id');
-	}
 }

@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %} {% endblock %}</title>
-    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-    {% include 'default/layout/header.Twig' %}
-    {% block beforeScript %} {% endblock %}
-    <style>
-        *{
-            font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
-        }
-        html,body{
-            width: 100%;
-            height:100%;
-        }
-        [un-cloak] {
-            display: none;
-        }
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %} {% endblock %}</title>
+	<script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+	{% include 'default/layout/header.Twig' %}
+	{% block beforeScript %} {% endblock %}
+	<style>
+      * {
+          font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
+      }
+
+      html, body {
+          width: 100%;
+          height: 100%;
+      }
+
+      [un-cloak] {
+          display: none;
+      }
+	</style>
+	{% if currentUser and currentUser.config.css %}
+		<style>
+			{{ currentUser.config.css }}
+		</style>
+	{% endif %}
 </head>
 <body class="bg-[#f1f5f9] dark:bg-slate-800 rounded-md dark:text-[#C0BEBF]">
 <div class="lg:w-[567px] mx-auto shadow-2xl bg-white dark:bg-[#181818]" un-cloak>
-    {% include 'default/layout/nav.Twig' %}
-    {% block content %} {% endblock %}
-    {% include 'default/layout/footer.Twig' %}
+	{% if currentUser and currentUser.config.selfHomePage == "on" and path == '/' %}
+	{% else %}
+		{% include 'default/layout/nav.Twig' %}
+	{% endif %}
+
+
+	{% block content %} {% endblock %}
+
+	{% include 'default/layout/footer.Twig' %}
+
 </div>
 {% block afterScript %} {% endblock %}
+{% if currentUser and currentUser.config.js %}
+	<script>
+		{{ currentUser.config.js|raw }}
+	</script>
+{% endif %}
 </body>
 </html>

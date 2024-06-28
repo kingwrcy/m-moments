@@ -86,53 +86,12 @@
 			</div>
 		</div>
 
-		<section>
-			<div class="mb-2 flex justify-between items-center cursor-pointer" id="toggleS3Btn">
-				<h2 class="font-bold ">S3相关配置</h2>
-				<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-				     viewBox="0 0 32 32">
-					<path d="M16 22L6 12l1.4-1.4l8.6 8.6l8.6-8.6L26 12z" fill="currentColor"></path>
-				</svg>
-			</div>
-			<div class="p-4 border rounded border-gray-300 border-solid hidden" id="s3Config">
-				<div class="field">
-					<label for="s3_key" class="label is-small">Access Key</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="ak" value="{{ data.config.ak }}">
-					</div>
-				</div>
-				<div class="field">
-					<label for="s3_secret" class="label is-small">Secret Key</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="sk" value="{{ data.config.sk }}">
-					</div>
-				</div>
-				<div class="field">
-					<label for="s3_secret" class="label is-small">域名</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="domain" value="{{ data.config.domain }}">
-					</div>
-				</div>
-				<div class="field">
-					<label for="endpoint" class="label is-small">S3 Endpoint</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="endpoint" value="{{ data.config.endpoint }}">
-					</div>
-				</div>
-				<div class="field">
-					<label for="bucket" class="label is-small">桶名称</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="bucket" value="{{ data.config.bucket }}">
-					</div>
-				</div>
-				<div class="field">
-					<label for="suffix" class="label is-small">后缀</label>
-					<div class="control">
-						<input class="input is-small" type="text" name="suffix" value="{{ data.config.suffix }}">
-					</div>
-				</div>
-			</div>
-		</section>
+		<div class="field text-xs">
+			<label class="checkbox  items-center gap-2" style="display: flex !important;">
+				<input type="checkbox" class="is-small" name="selfHomePage" {{ data.config.selfHomePage == "on" ? 'checked' : '' }}/>
+				<span class="font-bold ">个人页面设置为首页,同时隐藏顶部菜单</span>
+			</label>
+		</div>
 
 		{% if message %}
 			<div class="block has-text-danger">{{ message }}</div>
@@ -160,15 +119,7 @@
       };
       reader.readAsDataURL(file);
     };
-
-    const fileChanged = (name) =>{
-
-    }
-
     $(function () {
-      $("#toggleS3Btn").click(() => {
-        $("#s3Config").toggle()
-      })
 
 	    $("input[type=file]").change(function () {
 				const file = this.files[0];
@@ -180,6 +131,16 @@
 					$("#"+name).attr("src", url);
 				});
 			});
+
+      $("input[name='avatar_url']").change(function () {
+				const url = $(this).val()
+				$("#avatar_url").attr("src", url)
+			})
+
+      $("input[name='cover_url']").change(function () {
+        const url = $(this).val()
+        $("#cover_url").attr("src", url)
+      })
     })
 	</script>
 {% endblock %}

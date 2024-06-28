@@ -13,6 +13,7 @@ class Auth implements MiddlewareInterface {
 	 * @throws \ReflectionException
 	 */
 	public function process($request, $handler): Response {
+		View::assign('path', $request->path());
 		if (session('user')) {
 			View::assign('currentUser', session('user'));
 		}

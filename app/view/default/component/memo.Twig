@@ -2,7 +2,7 @@
 
 	<img src="{{ memo.author.avatar_url }}" alt="" class="avatar w-12 h-12 rounded cursor-pointer">
 	<div class="flex flex-col flex-1">
-		<div class="text-[#576b95] dark:text-white cursor-pointer w-fit">
+		<div class="text-[#576b95] dark:text-white cursor-pointer w-fit font-bold">
 			{{ memo.author.nickname }}
 		</div>
 
@@ -13,24 +13,27 @@
 				<span class="text-gray text-xs text-[#9DA4B0]">
 					{{ memo.author.created_at|timeAgo }}
 				</span>
-			<div data-trigger
-			     class="toolbar-icon px-2 py-1 bg-[#f7f7f7] dark:bg-slate-700 hover:bg-[#dedede] cursor-pointer rounded flex items-center justify-center"
-			>
-				<img
-						src="data:image/svg+xml,%3csvg%20t='1709204592505'%20class='icon'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20p-id='16237'%20width='16'%20height='16'%3e%3cpath%20d='M229.2%20512m-140%200a140%20140%200%201%200%20280%200%20140%20140%200%201%200-280%200Z'%20p-id='16238'%20fill='%238a8a8a'%3e%3c/path%3e%3cpath%20d='M794.8%20512m-140%200a140%20140%200%201%200%20280%200%20140%20140%200%201%200-280%200Z'%20p-id='16239'%20fill='%238a8a8a'%3e%3c/path%3e%3c/svg%3e"
-						class="w-3 h-3"/></div>
+			{% if currentUser %}
+				<div data-trigger
+				     class="toolbar-icon px-2 py-1 bg-[#f7f7f7] dark:bg-slate-700 hover:bg-[#dedede] cursor-pointer rounded flex items-center justify-center"
+				>
+					<img
+							src="data:image/svg+xml,%3csvg%20t='1709204592505'%20class='icon'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20p-id='16237'%20width='16'%20height='16'%3e%3cpath%20d='M229.2%20512m-140%200a140%20140%200%201%200%20280%200%20140%20140%200%201%200-280%200Z'%20p-id='16238'%20fill='%238a8a8a'%3e%3c/path%3e%3cpath%20d='M794.8%20512m-140%200a140%20140%200%201%200%20280%200%20140%20140%200%201%200-280%200Z'%20p-id='16239'%20fill='%238a8a8a'%3e%3c/path%3e%3c/svg%3e"
+							class="w-3 h-3"/>
+				</div>
+				<div data-trigger-item class="hidden absolute top-[-8px] right-[32px] bg-[#4c4c4c] rounded text-white p-2 px-4">
+					<div class="flex flex-row gap-4">
 
-			<div data-trigger-item class="hidden absolute top-[-8px] right-[32px] bg-[#4c4c4c] rounded text-white p-2 px-4">
-				<div class="flex flex-row gap-4">
-					<form action="/memo/like/{{ memo.id }}" class="flex flex-row gap-1 cursor-pointer items-center" data-like-form="{{ memo.id }}" method="post">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-						     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						     class="lucide lucide-heart-icon">
-							<path
-									d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-						</svg>
-						<button type="submit">点赞</button>
-					</form>
+						<form action="/memo/like/{{ memo.id }}" class="flex flex-row gap-1 cursor-pointer items-center"
+						      data-like-form="{{ memo.id }}" method="post">
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+							     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							     class="lucide lucide-heart-icon">
+								<path
+										d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+							</svg>
+							<button type="submit">点赞</button>
+						</form>
 
 						<span class="bg-[#6b7280] h-[20px] w-[1px]"></span>
 						<div class="flex flex-row gap-1 cursor-pointer items-center" data-trigger-comment="{{ memo.id }}">
@@ -44,7 +47,7 @@
 							</svg>
 							<div>评论</div>
 						</div>
-					{% if currentUser %}
+
 						{% if currentUser.id == memo.author.id or currentUser.id == 1 %}
 							<span class="bg-[#6b7280] h-[20px] w-[1px]"></span>
 							<div class="flex flex-row gap-1 cursor-pointer items-center"
@@ -74,24 +77,28 @@
 								<div>删除</div>
 							</div>
 						{% endif %}
-
-					{% endif %}
-				</div>
-			</div>
-		</div>
-
-		<div data-comment-area="{{ memo.id }}" class="rounded bottom-shadow bg-[#f7f7f7] dark:bg-[#202020]  flex-col gap-1 my-2 px-4 py-2 {{ (memo.fav_count == 0 and memo.comments is empty) ? 'hidden' :'flex' }}">
-			{% if memo.fav_count > 0 %}
-				<div class="flex gap-4">
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C64A4A"
-					     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon"
-					     data-v-e8d5a3a3="">
-						<path
-								d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-					</svg>
-					<span class="text-[#576b95]"><span class="fav_count">{{ memo.fav_count }}</span> 位访客</span>
+					</div>
 				</div>
 			{% endif %}
+		</div>
+
+		<div data-comment-area="{{ memo.id }}"
+		     class="rounded bottom-shadow bg-[#f7f7f7] dark:bg-[#202020]  flex-col gap-1 my-2 px-4 py-2 {{ (memo.fav_count == 0 and memo.comments is empty) ? 'hidden' :'flex' }}">
+			<div data-fav-count-box class="gap-4 {{ memo.fav_count > 0 ? 'flex' : 'hidden' }}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C64A4A"
+				     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon"
+				     data-v-e8d5a3a3="">
+					<path
+							d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+				</svg>
+				<div class="text-[#576b95]">
+					<span data-like-persons>
+					{% for like in memo.likes %}
+						<a class="text-[#576b95] dark:text-white"
+						   href="/user/{{ like.author.username }}">{{ like.author.nickname }}</a>{% if not loop.last %},{% endif %}
+					{% endfor %}</span> 等<span class="fav_count">{{ memo.fav_count }}</span>人点赞
+				</div>
+			</div>
 			<form class="gap-4 flex-col mt-4 hidden" data-comment-box="{{ memo.id }}" method="post"
 			      action="/memo/comment/{{ memo.id }}">
 				<textarea class="textarea is-small" name="content" placeholder="友好发言!"></textarea>
@@ -117,8 +124,6 @@
 									class="text-[#576b95] dark:text-white">{{ comment.author.nickname ?: comment.username }}</span>
 							{% if comment.author is not empty and comment.author.id == memo.author.id %}
 								<span class="border border-solid border-[#C64A4A] rounded mx-0.5 px-0.5 text-[#C64A4A]">作者</span>
-								{% elseif  not comment.author.username%}
-									<span class="border border-solid border-[#C64A4A] rounded mx-0.5 px-0.5 text-[#C64A4A]">游客</span>
 							{% endif %}
 
 							{% if comment.reply_username %}

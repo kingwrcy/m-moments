@@ -1,65 +1,70 @@
 {% extends 'default/layout/base.Twig' %}
 {% block content %}
-	<form action="/user/doReg" method="post" class="px-10 py-4">
-		<div class="field">
-			<label for="username" class="label">用户名</label>
-			<div class="control">
-				<input class="input" type="text" name="username" value="{{ data.username }}">
+	{% if  sysConfig.config.disable_register != "on" %}
+		<form action="/user/doReg" method="post" class="px-10 py-4">
+			<div class="field">
+				<label for="username" class="label">用户名</label>
+				<div class="control">
+					<input class="input" type="text" name="username" value="{{ data.username }}">
+				</div>
+				{% if exception starts with '用户名' %}
+					<p class="help is-danger">{{ exception }}</p>
+				{% endif %}
 			</div>
-			{% if exception starts with '用户名' %}
-				<p class="help is-danger">{{ exception }}</p>
-			{% endif %}
-		</div>
 
-		<div class="field">
-			<label for="password" class="label">密码</label>
-			<div class="control">
-				<input class="input" type="password" name="password" value="{{ data.password }}">
+			<div class="field">
+				<label for="password" class="label">密码</label>
+				<div class="control">
+					<input class="input" type="password" name="password" value="{{ data.password }}">
+				</div>
+				{% if exception starts with '密码' %}
+					<p class="help is-danger">{{ exception }}</p>
+				{% endif %}
 			</div>
-			{% if exception starts with '密码' %}
-				<p class="help is-danger">{{ exception }}</p>
-			{% endif %}
-		</div>
 
-		<div class="field">
-			<label for="repeatPassword" class="label">重复密码</label>
-			<div class="control">
-				<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
+			<div class="field">
+				<label for="repeatPassword" class="label">重复密码</label>
+				<div class="control">
+					<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
+				</div>
+				{% if exception starts with '重复密码' %}
+					<p class="help is-danger">{{ exception }}</p>
+				{% endif %}
 			</div>
-			{% if exception starts with '重复密码' %}
-				<p class="help is-danger">{{ exception }}</p>
-			{% endif %}
-		</div>
 
 
-		<div class="field">
-			<label for="email" class="label">邮箱</label>
-			<div class="control">
-				<input placeholder="会用来生成头像,请填写常用邮箱" class="input" type="text" name="email" value="{{ data.email }}">
+			<div class="field">
+				<label for="email" class="label">邮箱</label>
+				<div class="control">
+					<input placeholder="会用来生成头像,请填写常用邮箱" class="input" type="text" name="email"
+					       value="{{ data.email }}">
+				</div>
+				{% if exception starts with '邮箱' %}
+					<p class="help is-danger">{{ exception }}</p>
+				{% endif %}
+
 			</div>
-			{% if exception starts with '邮箱' %}
-				<p class="help is-danger">{{ exception }}</p>
+
+			{% if message %}
+				<div class="block has-text-success">{{ message }}</div>
 			{% endif %}
 
-		</div>
-
-		{% if message %}
-			<div class="block has-text-success">{{ message }}</div>
-		{% endif %}
-
-		<div class="field is-grouped">
-			<div class="control">
-				<button class="button is-link ">
+			<div class="field is-grouped">
+				<div class="control">
+					<button class="button is-link ">
 							<span class="icon is-small">
                 <i class="fas fa-check"></i>
               </span>
-					<span>注册用户</span>
-				</button>
+						<span>注册用户</span>
+					</button>
 
-				<a class="button is-light " href="/user/login">去登录</a>
+					<a class="button is-light " href="/user/login">去登录</a>
+				</div>
+
 			</div>
 
-		</div>
-
-	</form>
+		</form>
+	{% else %}
+		<div class="px-10 py-4">不开放注册!</div>
+	{% endif %}
 {% endblock %}

@@ -2,6 +2,8 @@
 
 namespace app\controller;
 
+use app\model\Memo;
+use app\model\SysConfig;
 use app\model\User;
 use Respect\Validation\Exceptions\ValidationException;
 use Respect\Validation\Validator as v;
@@ -11,12 +13,28 @@ use support\Response;
 
 class UserController {
 
-	protected $noNeedLogin = ['login', 'doLogin', 'reg', 'doReg'];
+	protected $noNeedLogin = ['login', 'doLogin', 'reg', 'doReg', 'specifyUser'];
 
 	public function logout(Request $request): Response {
 		$request->session()->forget('user');
 		return redirect('/');
 	}
+
+	public function specifyUser(Request $request, $username): Response {
+		$user = User::firstWhere("username", $username);
+		$per_page = 10;
+		$current_page = $request->input('page', 1);
+		$memos = Memo::where("user_id", $user->id)->with(['likes' => function ($query) {
+			$query->take(5);
+		}])->orderBy("created_at", "desc")
+			->paginate($per_page, ['*'], 'page', $current_page);
+
+		return view('default/user/mine', [
+			'memos' => $memos,
+			'user' => $user
+		]);
+	}
+
 
 	public function saveSettings(Request $request): Response {
 		$data = $request->post();
@@ -42,16 +60,16 @@ class UserController {
 		$avatar_url = $data['avatar_url'];
 		$avatar_url_file = $request->file('avatar_url');
 		if ($avatar_url_file && $avatar_url_file->isValid()) {
-			$destination = date("Ymd") .DIRECTORY_SEPARATOR. uniqid() .".". $avatar_url_file->getUploadExtension();
-			$avatar_url_file->move(getenv('UPLOAD_DIR') .DIRECTORY_SEPARATOR. $destination);
+			$destination = date("Ymd") . DIRECTORY_SEPARATOR . uniqid() . "." . $avatar_url_file->getUploadExtension();
+			$avatar_url_file->move(getenv('UPLOAD_DIR') . DIRECTORY_SEPARATOR . $destination);
 			$avatar_url = '/upload/' . $destination;
 		}
 
 		$cover_url = $data['cover_url'];
 		$cover_url_file = $request->file('cover_url');
 		if ($cover_url_file && $cover_url_file->isValid()) {
-			$destination = date("Ymd") .DIRECTORY_SEPARATOR. uniqid() .".". $cover_url_file->getUploadExtension();
-			$cover_url_file->move(getenv('UPLOAD_DIR') .DIRECTORY_SEPARATOR. $destination);
+			$destination = date("Ymd") . DIRECTORY_SEPARATOR . uniqid() . "." . $cover_url_file->getUploadExtension();
+			$cover_url_file->move(getenv('UPLOAD_DIR') . DIRECTORY_SEPARATOR . $destination);
 			$cover_url = '/upload/' . $destination;
 		}
 
@@ -65,12 +83,7 @@ class UserController {
 			'config' => [
 				'css' => $data['css'],
 				'js' => $data['js'],
-				'ak' => $data['ak'],
-				'sk' => $data['sk'],
-				'domain' => $data['domain'],
-				'endpoint' => $data['endpoint'],
-				'bucket' => $data['bucket'],
-				'suffix' => $data['suffix'],
+				'selfHomePage' => $data['selfHomePage'],
 			],
 		]);
 
@@ -90,7 +103,9 @@ class UserController {
 	}
 
 	public function reg(Request $request): Response {
-		return view('default/user/reg');
+		return view('default/user/reg', [
+			'sysConfig' => SysConfig::find(1)
+		]);
 	}
 
 	public function doReg(Request $request): Response {
@@ -125,7 +140,9 @@ class UserController {
 			'password' => password_hash($data['password'], PASSWORD_BCRYPT),
 			'email' => $data['email'],
 			'nickname' => $data['username'],
-            'avatar_url' => getenv('DEFAULT_USER_AVATAR_CDN'). hash("sha256", $data['email']),
+			'avatar_url' => getenv('DEFAULT_USER_AVATAR_CDN') . hash("sha256", $data['email']),
+			'cover_url' => '/images/cover.webp',
+			'sloan' => '天道酬勤',
 		]);
 
 		return view('default/user/reg', ['message' => '注册成功,快去登录吧！']);

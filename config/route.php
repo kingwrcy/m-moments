@@ -18,6 +18,11 @@ use app\controller\UploadController;
 use app\controller\UserController;
 use Webman\Route;
 
+Route::get('/hot', [IndexController::class, 'hot']);
+Route::get('/square', [IndexController::class, 'square']);
+Route::get('/settings', [IndexController::class, 'settings']);
+Route::post('/saveSettings', [IndexController::class, 'saveSettings']);
+
 Route::get('/user/login', [UserController::class, 'login']);
 Route::post('/user/doLogin', [UserController::class, 'doLogin']);
 Route::post('/user/doReg', [UserController::class, 'doReg']);
@@ -25,6 +30,7 @@ Route::get('/user/reg', [UserController::class, 'reg']);
 Route::get('/user/logout', [UserController::class, 'logout']);
 Route::get('/user/settings', [UserController::class, 'settings']);
 Route::post('/user/saveSettings', [UserController::class, 'saveSettings']);
+Route::get('/user/{username}', [UserController::class, 'specifyUser']);
 
 Route::get('/upload/[{file:.+}]', [UploadController::class, 'file']);
 
