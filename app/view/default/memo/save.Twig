@@ -3,80 +3,148 @@
 
 {% block content %}
 	<div class="p-2">
-		<form action="/memo/save" method="post">
+		<form action="/memo/save" method="post" id="saveForm">
 			<input type="hidden" name="id" value="{{ data.id }}">
-			<div class="field">
-				<div class="control">
-					<input id="content" type="hidden" name="content" value="{{ data.content }}"/>
-					<div id="editor"></div>
+			<input type="hidden" name="content"/>
+			<div class="flex gap-2 my-2" id="toolbar">
+				<div class="w-5 h-5 cursor-pointer " title="粗体" id="bold">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7z"></path><path d="M13 12h1a3.5 3.5 0 0 1 0 7H7v-7"></path></g></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="斜体" id="italy">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h6"></path><path d="M7 19h6"></path><path d="M14 5l-4 14"></path></g></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="有序列表" id="unOrderList">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" fill="currentColor"></path></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="无序列表" id="orderList">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5s1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5S5.5 6.83 5.5 6S4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5s1.5-.68 1.5-1.5s-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" fill="currentColor"></path></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="链接" id="link">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-.5.5"></path><path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l.5-.5"></path></g></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="图片" id="image">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><g fill="none"><path d="M11.5 5.502a1.002 1.002 0 1 1-2.004 0a1.002 1.002 0 0 1 2.004 0zM2 4.5A2.5 2.5 0 0 1 4.5 2h7A2.5 2.5 0 0 1 14 4.5v7a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 11.5v-7zM4.5 3A1.5 1.5 0 0 0 3 4.5v7c0 .232.052.45.146.647l3.652-3.652a1.7 1.7 0 0 1 2.404 0l3.652 3.652c.094-.196.146-.415.146-.647v-7A1.5 1.5 0 0 0 11.5 3h-7zm7.647 9.854L8.495 9.202a.7.7 0 0 0-.99 0l-3.652 3.652c.196.094.415.146.647.146h7c.232 0 .45-.053.647-.146z" fill="currentColor"></path></g></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="行内代码" id="code">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><path d="M31 16l-7 7l-1.41-1.41L28.17 16l-5.58-5.59L24 9l7 7z" fill="currentColor"></path><path d="M1 16l7-7l1.41 1.41L3.83 16l5.58 5.59L8 23l-7-7z" fill="currentColor"></path><path d="M12.419 25.484L17.639 6l1.932.518L14.35 26z" fill="currentColor"></path></svg>
+				</div>
+				<div class="w-5 h-5 cursor-pointer " title="代码块" id="codeBlock">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path><path d="M10 13l-1 2l1 2"></path><path d="M14 13l1 2l-1 2"></path></g></svg>
+				</div>
+{#				<div class="w-5 h-5 cursor-pointer " title="上传图片" id="uploadImage">#}
+{#					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024"><path d="M518.3 459a8 8 0 0 0-12.6 0l-112 141.7a7.98 7.98 0 0 0 6.3 12.9h73.9V856c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V613.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 459z" fill="currentColor"></path><path d="M811.4 366.7C765.6 245.9 648.9 160 512.2 160S258.8 245.8 213 366.6C127.3 389.1 64 467.2 64 560c0 110.5 89.5 200 199.9 200H304c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8h-40.1c-33.7 0-65.4-13.4-89-37.7c-23.5-24.2-36-56.8-34.9-90.6c.9-26.4 9.9-51.2 26.2-72.1c16.7-21.3 40.1-36.8 66.1-43.7l37.9-9.9l13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0 1 52.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9c15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5l37.8 10C846.1 454.5 884 503.8 884 560c0 33.1-12.9 64.3-36.3 87.7a123.07 123.07 0 0 1-87.6 36.3H720c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h40.1C870.5 760 960 670.5 960 560c0-92.7-63.1-170.7-148.6-193.3z" fill="currentColor"></path></svg>#}
+{#				</div>#}
+			</div>
+			<div class="bulma-field">
+				<div class="bulma-control">
+					<textarea class="bulma-textarea" style="height:300px;" id="contentMD" placeholder="支持markdown语法"></textarea>
 				</div>
 				{% if exception starts with '内容' %}
-					<p class="help is-danger">{{ exception }}</p>
+					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
-			<div class="field is-grouped">
-				<div class="control">
-					<button class="button is-link is-small">
+			<div class="bulma-field bulma-is-grouped">
+				<div class="bulma-control">
+					<button class="bulma-button is-link is-small">
 						<span>发言</span>
 					</button>
-					<a class="button is-small" href="/">
+					<a class="bulma-button is-small" href="/">
 						<span>返回</span>
 					</a>
 				</div>
 			</div>
 		</form>
-
 	</div>
 {% endblock %}
 
 {% block beforeScript %}
-	<script src="https://cdn.mblog.club/mm/toastui-editor-all.min.js"></script>
-	<script src="https://cdn.mblog.club/mm/toast.zh.cn.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.mblog.club/mm/toastui-editor.min.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+	<script src="/js/textarea.min.js"></script>
 {% endblock %}
 
 {% block afterScript %}
 	<script>
-      const editor = new toastui.Editor({
-          el: document.querySelector('#editor'),
-          initialEditType: 'markdown',
-          hideModeSwitch: true,
-          language: 'zh-CN',
-          initialValue: document.querySelector("#content").value,
-          toolbarItems: [
-              ['bold', 'ul', 'ol', 'task', 'image', 'link','code', 'codeblock'],
-          ],
-          events: {
-              change: function () {
-                  document.querySelector("#content").value = editor.getMarkdown();
-              }
-          },
-          hooks: {
-              addImageBlobHook: function (blob, callback) {
-                  Toastify({
-                      text: "功能暂未实现",
-                      duration: 3000,
-                      destination: "https://github.com/apvarun/toastify-js",
-                      newWindow: true,
-                      close: true,
-                      gravity: "top",
-                      position: "center",
-                      stopOnFocus: true,
-                  }).showToast();
-                  // const formData = new FormData();
-                  // formData.append('image', blob);
-                  // fetch('/memo/uploadImage', {
-                  // 		method: 'POST',
-                  // 		body: formData
-                  // }).then(response => {
-                  // 		if(response.ok){
-                  // 				response.json().then(data => {
-                  // 						callback(data.url);
-                  // 				});
-                  // 		}
-                  // });
-              }
-          }
-      });
+    const md = window.markdownit();
+    $(function (){
+
+      const $contentMD = $("#contentMD")
+
+      $contentMD.on('input',function(){
+        $("input[name='content']").val(md.render($contentMD.val()));
+      })
+
+
+	    $("#bold").on('click',function (){
+        $contentMD.surroundSelectedText("**","**")
+	    })
+      $("#italy").on('click',function (){
+        $contentMD.surroundSelectedText("_","_")
+      })
+      $("#unOrderList").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.start === sel.end && sel.start >= 0){
+          $contentMD.insertText( '\n- \n- \n- \n',sel.end)
+          $contentMD.setSelection(sel.start+3)
+        }else{
+          $contentMD.insertText( '- \n- \n- \n',sel.end)
+          $contentMD.setSelection(sel.start+2)
+        }
+      })
+      $("#orderList").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.start === sel.end && sel.start >= 0){
+          $contentMD.insertText( '\n1. \n1. \n3. \n',sel.end)
+          $contentMD.setSelection(sel.start+4)
+        }else{
+          $contentMD.insertText( '1. \n2. \n3. \n',sel.end)
+          $contentMD.setSelection(sel.start+3)
+        }
+      })
+
+      $("#link").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.length > 0){
+          $contentMD.surroundSelectedText("[","]()")
+          $contentMD.setSelection(sel.end+3)
+        }else{
+          $contentMD.insertText( '[]()',sel.end+1)
+          $contentMD.setSelection(sel.start+1)
+        }
+      })
+
+      $("#image").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.length > 0){
+          $contentMD.surroundSelectedText("![","]()")
+          $contentMD.setSelection(sel.end+4)
+        }else{
+          $contentMD.insertText( '![]()',sel.end+1)
+          $contentMD.setSelection(sel.start+2)
+        }
+      })
+
+      $("#code").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.length > 0){
+          $contentMD.surroundSelectedText( '`','`')
+          $contentMD.setSelection(sel.end+1)
+        }else{
+          $contentMD.insertText("``",sel.end+1)
+          $contentMD.setSelection(sel.end+1)
+        }
+      })
+
+      $("#codeBlock").on('click',function (){
+        const sel = $contentMD.getSelection();
+        if(sel.length > 0){
+          $contentMD.surroundSelectedText( '```\n','\n```')
+          $contentMD.setSelection(sel.start+3)
+        }else{
+          $contentMD.insertText("```\n\n```",sel.end+1)
+          $contentMD.setSelection(sel.end+4)
+        }
+      })
+
+    })
 	</script>
 {% endblock %}

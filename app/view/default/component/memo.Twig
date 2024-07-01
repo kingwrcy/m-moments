@@ -7,7 +7,8 @@
 			{{ memo.author.nickname }}
 		</a>
 
-		<div class="text-wrap break-all line-clamp-10 max-h-[400px] overflow-hidden markdown-body" data-content="{{ memo.content }}">
+		<div class="text-wrap break-all line-clamp-10 max-h-[400px] overflow-hidden markdown-body" data-content="">
+			{{ memo.content|raw }}
 		</div>
 
 		<div class="flex justify-between relative items-center">
@@ -121,7 +122,7 @@
 							<img
 									src="{{ comment.author.avatar_url ?: 'https://avatars.tzador.com/face?size=60&id=604080dfb-e4f5-432f-9b7a-a9442a0dcd74' }}"
 									alt=""
-									class="avatar w-6 h-6 rounded mr-2 vertical-top">
+									class="avatar w-5 h-5 rounded mr-2 vertical-top">
 							<span
 									class="text-[#576b95] dark:text-white">{{ comment.author.nickname ?: comment.username }}</span>
 							{% if comment.author is not empty and comment.author.id == memo.author.id %}

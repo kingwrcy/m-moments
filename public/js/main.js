@@ -50,16 +50,6 @@ $(function () {
         }
     })
 
-
-    // markdown解析
-    $("div[data-content]").each(function (index) {
-        new toastui.Editor({
-            el: $(this).get(0),
-            initialValue: $(this).data('content') + ''
-        });
-        $(this).attr('data-content', '')
-    })
-
     // 互动工具栏
     $(document.body).on('click', function (event) {
         const $target = $(event.target); // 获取被点击的元素
@@ -91,18 +81,18 @@ $(function () {
     })
 
 
-    setTimeout(() => {
-        $(".toastui-editor-contents pre code").each(function () {
-            const $pre = $(this).parent()
-            const copyBtn = $(`<button class="text-xs px-2 py-1 shadow top-2 right-2 absolute bg-white rounded hidden">复制</button>`)
-            $pre.css("position", "relative")
-            $pre.append(copyBtn).hover(()=>{
-                copyBtn.removeClass('text-gray-300').text('复制').toggle()
-            })
-            copyBtn.bind('click',()=>{
-                copyBtn.addClass('text-gray-300').text('已复制!')
-                copyToClipboard($pre.find("code").text())
-            })
-        })
-    }, 1000)
+    // setTimeout(() => {
+    //     $(".toastui-editor-contents pre code").each(function () {
+    //         const $pre = $(this).parent()
+    //         const copyBtn = $(`<button class="text-xs px-2 py-1 shadow top-2 right-2 absolute bg-white rounded hidden">复制</button>`)
+    //         $pre.css("position", "relative")
+    //         $pre.append(copyBtn).hover(()=>{
+    //             copyBtn.removeClass('text-gray-300').text('复制').toggle()
+    //         })
+    //         copyBtn.bind('click',()=>{
+    //             copyBtn.addClass('text-gray-300').text('已复制!')
+    //             copyToClipboard($pre.find("code").text())
+    //         })
+    //     })
+    // }, 1000)
 })

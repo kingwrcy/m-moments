@@ -4,37 +4,37 @@
 {% block content %}
 
 	<form action="/user/doLogin" method="post" class="px-10 py-4">
-		<div class="field">
-			<label for="username" class="label">用户名</label>
-			<div class="control">
-				<input class="input" type="text" name="username" value="{{ data.username }}">
+		<div class="bulma-field">
+			<label for="username" class="bulma-label">用户名</label>
+			<div class="bulma-control">
+				<input class="bulma-input" type="text" name="username" value="{{ data.username }}">
 			</div>
 			{% if exception starts with '用户名' %}
-				<p class="help is-danger">{{ exception }}</p>
+				<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 			{% endif %}
 		</div>
 
-		<div class="field">
-			<label for="password" class="label">密码</label>
-			<div class="control">
-				<input class="input" type="password" name="password" value="{{ data.password }}">
+		<div class="bulma-field">
+			<label for="password" class="bulma-label">密码</label>
+			<div class="bulma-control">
+				<input class="bulma-input" type="password" name="password" value="{{ data.password }}">
 			</div>
 			{% if exception starts with '密码' %}
-				<p class="help is-danger">{{ exception }}</p>
+				<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 			{% endif %}
 		</div>
 
 		{% if message %}
-			<div class="block has-text-success">{{ message }}</div>
+			<div class="bulma-block has-text-success">{{ message }}</div>
 		{% endif %}
 
-		<div class="field is-grouped">
-			<div class="control">
-				<button class="button is-link is-small">
+		<div class="bulma-field bulma-is-grouped">
+			<div class="bulma-control">
+				<button class="bulma-button">
 					<span>登录</span>
 				</button>
 
-				<a class="button is-light is-small" href="/user/reg">去注册</a>
+				<a class="bulma-button" href="/user/reg">去注册</a>
 			</div>
 
 		</div>

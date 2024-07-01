@@ -3,45 +3,45 @@
 {% block content %}
 	{% if  sysConfig.config.disable_register != "on" %}
 		<form action="/user/doReg" method="post" class="px-10 py-4">
-			<div class="field">
+			<div class="bulma-field">
 				<label for="username" class="label">用户名</label>
-				<div class="control">
+				<div class="bulma-control">
 					<input class="input" type="text" name="username" value="{{ data.username }}">
 				</div>
 				{% if exception starts with '用户名' %}
-					<p class="help is-danger">{{ exception }}</p>
+					<p class="help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
-			<div class="field">
+			<div class="bulma-field">
 				<label for="password" class="label">密码</label>
-				<div class="control">
+				<div class="bulma-control">
 					<input class="input" type="password" name="password" value="{{ data.password }}">
 				</div>
 				{% if exception starts with '密码' %}
-					<p class="help is-danger">{{ exception }}</p>
+					<p class="help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
-			<div class="field">
+			<div class="bulma-field">
 				<label for="repeatPassword" class="label">重复密码</label>
-				<div class="control">
+				<div class="bulma-control">
 					<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
 				</div>
 				{% if exception starts with '重复密码' %}
-					<p class="help is-danger">{{ exception }}</p>
+					<p class="help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
 
-			<div class="field">
+			<div class="bulma-field">
 				<label for="email" class="label">邮箱</label>
-				<div class="control">
+				<div class="bulma-control">
 					<input placeholder="会用来生成头像,请填写常用邮箱" class="input" type="text" name="email"
 					       value="{{ data.email }}">
 				</div>
 				{% if exception starts with '邮箱' %}
-					<p class="help is-danger">{{ exception }}</p>
+					<p class="help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 
 			</div>
@@ -51,7 +51,7 @@
 			{% endif %}
 
 			<div class="field is-grouped">
-				<div class="control">
+				<div class="bulma-control">
 					<button class="button is-link is-small">
 						<span>注册用户</span>
 					</button>

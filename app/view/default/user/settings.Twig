@@ -3,105 +3,105 @@
 
 {% block content %}
 	<form action="/user/saveSettings" method="post" class="px-10 py-4" enctype="multipart/form-data">
-		<div class="field">
+		<div class="bulma-field">
 			<label for="avatar" class="label is-small">头像</label>
-			<div class="control">
-				<div class="file is-small">
-					<label class="file-label">
-						<input class="file-input is-small" name="avatar_url" type="file"/>
-						<span class="file-cta">
-				      <span class="file-label"> 上传本地文件 </span>
+			<div class="bulma-control">
+				<div class="bulma-file bulma-is-small">
+					<label class="bulma-file-label">
+						<input class="bulma-file-input bulma-is-small" name="avatar_url" type="file"/>
+						<span class="bulma-file-cta">
+				      <span class="bulma-file-label"> 上传本地文件 </span>
 				    </span>
 					</label>
 				</div>
-				<input class="input is-small my-2" name="avatar_url" value="{{ data.avatar_url }}" type="text"
+				<input class="bulma-input bulma-is-small my-2" name="avatar_url" value="{{ data.avatar_url }}" type="text"
 				       placeholder="或者使用在线地址">
 			</div>
 
-			<figure class="image avatar w-16 h-16 my-2 ">
+			<figure class="bulma-image bulma-avatar w-16 h-16 my-2 ">
 				<img src="{{ data.avatar_url }}" class="rounded" id="avatar_url"/>
 			</figure>
 		</div>
-		<div class="field">
-			<label for="cover_url" class="label is-small">顶部图片</label>
-			<div class="control">
-				<div class="file is-small">
-					<label class="file-label">
-						<input class="file-input is-small" type="file" name="cover_url"/>
-						<span class="file-cta">
-				      <span class="file-label"> 上传本地文件 </span>
+		<div class="bulma-field">
+			<label for="cover_url" class="bulma-label bulma-is-small">顶部图片</label>
+			<div class="bulma-control">
+				<div class="bulma-file bulma-is-small">
+					<label class="bulma-file-label">
+						<input class="bulma-file-input bulma-is-small" type="file" name="cover_url"/>
+						<span class="bulma-file-cta">
+				      <span class="bulma-file-label"> 上传本地文件 </span>
 				    </span>
 					</label>
 				</div>
-				<input class="input is-small my-2" type="text" name="cover_url" value="{{ data.cover_url }}"
+				<input class="bulma-input bulma-is-small my-2" type="text" name="cover_url" value="{{ data.cover_url }}"
 				       placeholder="或者使用在线地址">
 			</div>
-			<figure class="image w-full max-h-[300px] my-2">
+			<figure class="bulma-image w-full max-h-[300px] my-2">
 				<img src="{{ data.cover_url }}" class="rounded" id="cover_url"/>
 			</figure>
 		</div>
-		<div class="field">
-			<label for="username" class="label is-small">用户名</label>
-			<div class="control">
-				<input class="input is-small" type="text" name="username" value="{{ data.username }}">
+		<div class="bulma-field">
+			<label for="username" class="bulma-label bulma-is-small">用户名</label>
+			<div class="bulma-control">
+				<input class="bulma-input bulma-is-small" type="text" name="username" value="{{ data.username }}">
 			</div>
 		</div>
-		<div class="field">
-			<label for="nickname" class="label is-small">昵称</label>
-			<div class="control">
-				<input class="input is-small" type="text" name="nickname" value="{{ data.nickname }}">
-			</div>
-		</div>
-
-		<div class="field">
-			<label for="slogan" class="label is-small">心情状态</label>
-			<div class="control">
-				<input class="input is-small" type="text" name="slogan" value="{{ data.slogan }}">
+		<div class="bulma-field">
+			<label for="nickname" class="bulma-label bulma-is-small">昵称</label>
+			<div class="bulma-control">
+				<input class="bulma-input bulma-is-small" type="text" name="nickname" value="{{ data.nickname }}">
 			</div>
 		</div>
 
-		<div class="field">
-			<label for="password" class="label is-small">密码</label>
-			<div class="control">
-				<input class="input is-small" type="password" name="password" placeholder="不修改留空,修改密码需要重新登录">
+		<div class="bulma-field">
+			<label for="slogan" class="bulma-label bulma-is-small">心情状态</label>
+			<div class="bulma-control">
+				<input class="bulma-input bulma-is-small" type="text" name="slogan" value="{{ data.slogan }}">
 			</div>
 		</div>
 
-		<div class="field">
-			<label for="email" class="label is-small">邮箱</label>
-			<div class="control">
-				<input class="input is-small" type="text" name="email" value="{{ data.email }}">
+		<div class="bulma-field">
+			<label for="password" class="bulma-label bulma-is-small">密码</label>
+			<div class="bulma-bulma-control">
+				<input class="bulma-input bulma-is-small" type="password" name="password" placeholder="不修改留空,修改密码需要重新登录">
 			</div>
 		</div>
 
-		<div class="field">
-			<label for="css" class="label is-small">自定义CSS</label>
-			<div class="control">
-				<textarea class="textarea is-small" name="css">{{ data.config.css }}</textarea>
+		<div class="bulma-field">
+			<label for="email" class="bulma-label bulma-is-small">邮箱</label>
+			<div class="bulma-control">
+				<input class="bulma-input bulma-is-small" type="text" name="email" value="{{ data.email }}">
 			</div>
 		</div>
 
-		<div class="field">
-			<label for="js" class="label is-small">自定义JS</label>
-			<div class="control">
-				<textarea class="textarea is-small" name="js">{{ data.config.js }}</textarea>
+		<div class="bulma-field">
+			<label for="css" class="bulma-label is-small">自定义CSS</label>
+			<div class="bulma-control">
+				<textarea class="bulma-textarea bulma-is-small" name="css">{{ data.config.css }}</textarea>
+			</div>
+		</div>
+
+		<div class="bulma-field">
+			<label for="js" class="bulma-label bulma-is-small">自定义JS</label>
+			<div class="bulma-control">
+				<textarea class="bulma-textarea bulma-is-small" name="js">{{ data.config.js }}</textarea>
 			</div>
 		</div>
 
 		<div class="field text-xs">
 			<label class="checkbox  items-center gap-2" style="display: flex !important;">
-				<input type="checkbox" class="is-small" name="selfHomePage" {{ data.config.selfHomePage == "on" ? 'checked' : '' }}/>
+				<input type="checkbox" class="bulma-is-small" name="selfHomePage" {{ data.config.selfHomePage == "on" ? 'checked' : '' }}/>
 				<span class="font-bold ">个人页面设置为首页,同时隐藏顶部菜单</span>
 			</label>
 		</div>
 
 		{% if message %}
-			<div class="block has-text-danger">{{ message }}</div>
+			<div class="bulma-block has-text-danger">{{ message }}</div>
 		{% endif %}
 
-		<div class="field my-2">
-			<div class="control">
-				<button class="button is-link is-small">
+		<div class="bulma-field my-2">
+			<div class="bulma-control">
+				<button class="bulma-button bulma-is-link bulma-is-small">
 					<span>保存设置</span>
 				</button>
 			</div>
