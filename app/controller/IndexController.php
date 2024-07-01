@@ -31,7 +31,7 @@ class IndexController {
 				'endpoint' => $data['endpoint'],
 				'bucket' => $data['bucket'],
 				'suffix' => $data['suffix'],
-				'disable_register' => $data['disable_register'],
+				'disable_register' => $data['disable_register'] ?? "off",
 			],
 		];
 		SysConfig::find(1)->update($config);
@@ -50,6 +50,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
+            'sysConfig' => SysConfig::find(1)
 		]);
 	}
 
@@ -77,6 +78,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
+            'sysConfig' => SysConfig::find(1)
 		]);
 	}
 
@@ -90,6 +92,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
+            'sysConfig' => SysConfig::find(1)
 		]);
 	}
 

@@ -4,34 +4,23 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %} {% endblock %}</title>
+	<link rel="shortcut icon" type="image/png" href="{{ sysConfig.favicon }}">
 	<script src="https://cdn.mblog.club/mm/unocss.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.mblog.club/mm/bulma-v1.0.1.css">
 	<script src="https://cdn.mblog.club/mm/jquery.min.js"></script>
 	<script src="https://cdn.mblog.club/mm/jquery.form.min.js"></script>
 	{% include 'default/layout/header.Twig' %}
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/md.css">
 	{% block beforeScript %} {% endblock %}
-	<style>
-      * {
-          font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
-      }
-
-      html, body {
-          width: 100%;
-          height: 100%;
-      }
-
-      [un-cloak] {
-          display: none;
-      }
-	</style>
 	{% if currentUser and currentUser.config.css %}
 		<style>
 			{{ currentUser.config.css }}
 		</style>
 	{% endif %}
 </head>
-<body class="bg-[#f1f5f9] dark:bg-slate-800 rounded-md dark:text-[#C0BEBF]">
-<div class="lg:w-[567px] mx-auto shadow-2xl bg-white dark:bg-[#181818]" un-cloak>
+<body class="bg-[#f1f5f9] dark:bg-slate-800 rounded-md dark:text-[#C0BEBF] flex flex-col">
+<div class="lg:w-[567px] mx-auto shadow-2xl bg-white dark:bg-[#181818] flex-1" un-cloak>
 	{% if currentUser and currentUser.config.selfHomePage == "on" and path == '/' %}
 	{% else %}
 		{% include 'default/layout/nav.Twig' %}

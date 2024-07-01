@@ -1,4 +1,5 @@
 {% extends 'default/layout/base.Twig' %}
+{% block title %} {{user.nickname}}-个人主页 {% endblock %}
 
 {% block content %}
 	<div class="header relative mb-8"><img class="header-img w-full"
@@ -21,4 +22,11 @@
 		{% endfor %}
 	</div>
 
+{% endblock %}
+
+{% block afterScript %}
+	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css"/>
+	<script src="/js/main.js">
+	</script>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'default/layout/base.Twig' %}
+{% block title %} 发言 {% endblock %}
 
 {% block content %}
 	<div class="p-2">
@@ -18,9 +19,9 @@
 					<button class="button is-link is-small">
 						<span>发言</span>
 					</button>
-					<button class="button is-small" onclick="location.href='/'">
+					<a class="button is-small" href="/">
 						<span>返回</span>
-					</button>
+					</a>
 				</div>
 			</div>
 		</form>
@@ -36,43 +37,46 @@
 
 {% block afterScript %}
 	<script>
-    const editor = new toastui.Editor({
-      el: document.querySelector('#editor'),
-      initialEditType: 'markdown',
-      hideModeSwitch: true,
-      language: 'zh-CN',
-      initialValue:document.querySelector("#content").value,
-      events: {
-        change: function () {
-          document.querySelector("#content").value = editor.getMarkdown();
-        }
-      },
-      hooks: {
-        addImageBlobHook: function (blob, callback) {
-          Toastify({
-            text: "功能暂未实现",
-            duration: 3000,
-            destination: "https://github.com/apvarun/toastify-js",
-            newWindow: true,
-            close: true,
-            gravity: "top",
-            position: "center",
-            stopOnFocus: true,
-          }).showToast();
-          // const formData = new FormData();
-          // formData.append('image', blob);
-          // fetch('/memo/uploadImage', {
-          // 		method: 'POST',
-          // 		body: formData
-          // }).then(response => {
-          // 		if(response.ok){
-          // 				response.json().then(data => {
-          // 						callback(data.url);
-          // 				});
-          // 		}
-          // });
-        }
-      }
-    });
+      const editor = new toastui.Editor({
+          el: document.querySelector('#editor'),
+          initialEditType: 'markdown',
+          hideModeSwitch: true,
+          language: 'zh-CN',
+          initialValue: document.querySelector("#content").value,
+          toolbarItems: [
+              ['bold', 'ul', 'ol', 'task', 'image', 'link','code', 'codeblock'],
+          ],
+          events: {
+              change: function () {
+                  document.querySelector("#content").value = editor.getMarkdown();
+              }
+          },
+          hooks: {
+              addImageBlobHook: function (blob, callback) {
+                  Toastify({
+                      text: "功能暂未实现",
+                      duration: 3000,
+                      destination: "https://github.com/apvarun/toastify-js",
+                      newWindow: true,
+                      close: true,
+                      gravity: "top",
+                      position: "center",
+                      stopOnFocus: true,
+                  }).showToast();
+                  // const formData = new FormData();
+                  // formData.append('image', blob);
+                  // fetch('/memo/uploadImage', {
+                  // 		method: 'POST',
+                  // 		body: formData
+                  // }).then(response => {
+                  // 		if(response.ok){
+                  // 				response.json().then(data => {
+                  // 						callback(data.url);
+                  // 				});
+                  // 		}
+                  // });
+              }
+          }
+      });
 	</script>
 {% endblock %}
