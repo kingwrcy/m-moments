@@ -4,7 +4,7 @@
 {% block content %}
 	<form action="/user/saveSettings" method="post" class="px-10 py-4" enctype="multipart/form-data">
 		<div class="bulma-field">
-			<label for="avatar" class="label is-small">头像</label>
+			<label for="avatar" class="bulma-label bulma-is-small">头像</label>
 			<div class="bulma-control">
 				<div class="bulma-file bulma-is-small">
 					<label class="bulma-file-label">
@@ -75,7 +75,7 @@
 		</div>
 
 		<div class="bulma-field">
-			<label for="css" class="bulma-label is-small">自定义CSS</label>
+			<label for="css" class="bulma-label bulma-is-small">自定义CSS</label>
 			<div class="bulma-control">
 				<textarea class="bulma-textarea bulma-is-small" name="css">{{ data.config.css }}</textarea>
 			</div>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
 
-		<div class="field text-xs">
+		<div class="bulma-field text-xs">
 			<label class="checkbox  items-center gap-2" style="display: flex !important;">
 				<input type="checkbox" class="bulma-is-small" name="selfHomePage" {{ data.config.selfHomePage == "on" ? 'checked' : '' }}/>
 				<span class="font-bold ">个人页面设置为首页,同时隐藏顶部菜单</span>

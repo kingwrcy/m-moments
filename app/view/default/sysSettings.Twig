@@ -5,43 +5,43 @@
 	<form action="/saveSettings" method="post" class="px-10 py-4" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="{{ data.id }}">
 		<div class="bulma-field">
-			<label for="website_title" class="label is-small">站点名称</label>
+			<label for="website_title" class="bulma-label bulma-is-small">站点名称</label>
 			<div class="bulma-control">
-				<input class="input is-small" type="text" name="website_title" value="{{ data.website_title }}">
+				<input class="bulma-input bulma-is-small" type="text" name="website_title" value="{{ data.website_title }}">
 			</div>
 		</div>
 		<div class="bulma-field">
-			<label for="favicon" class="label is-small">favicon地址</label>
+			<label for="favicon" class="bulma-label bulma-is-small">favicon地址</label>
 			<div class="bulma-control">
-				<input class="input is-small" type="text" name="favicon" value="{{ data.favicon }}">
+				<input class="bulma-input bulma-is-small" type="text" name="favicon" value="{{ data.favicon }}">
 			</div>
 		</div>
 
 		<div class="bulma-field">
-			<label for="theme" class="label is-small">默认主题</label>
+			<label for="theme" class="bulma-label bulma-is-small">默认主题</label>
 			<div class="bulma-control">
-				<input class="input is-small" type="text" name="theme" value="{{ data.theme }}">
+				<input class="bulma-input bulma-is-small" type="text" name="theme" value="{{ data.theme }}">
 			</div>
 		</div>
 
-		<div class="field text-xs">
+		<div class="bulma-field text-xs">
 			<label class="checkbox  items-center gap-2" style="display: flex !important;">
-				<input type="checkbox" class="is-small" name="disable_register" {{ data.config.disable_register == "on" ? 'checked' : '' }}/>
+				<input type="checkbox" class="bulma-is-small" name="disable_register" {{ data.config.disable_register == "on" ? 'checked' : '' }}/>
 				<span class="font-bold ">禁止注册用户</span>
 			</label>
 		</div>
 
 		<div class="bulma-field">
-			<label for="css" class="label is-small">自定义CSS</label>
+			<label for="css" class="bulma-label bulma-is-small">自定义CSS</label>
 			<div class="bulma-control">
-				<textarea class="textarea is-small" name="css">{{ data.config.css }}</textarea>
+				<textarea class="bulma-textarea bulma-is-small" name="css">{{ data.config.css }}</textarea>
 			</div>
 		</div>
 
 		<div class="bulma-field">
-			<label for="js" class="label is-small">自定义JS</label>
+			<label for="js" class="bulma-label bulma-is-small">自定义JS</label>
 			<div class="bulma-control">
-				<textarea class="textarea is-small" name="js">{{ data.config.js }}</textarea>
+				<textarea class="bulma-textarea bulma-is-small" name="js">{{ data.config.js }}</textarea>
 			</div>
 		</div>
 
@@ -55,39 +55,39 @@
 			</div>
 			<div class="p-4 border rounded border-gray-300 border-solid hidden" id="s3Config">
 				<div class="bulma-field">
-					<label for="s3_key" class="label is-small">Access Key</label>
+					<label for="s3_key" class="bulma-label bulma-is-small">Access Key</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="ak" value="{{ data.config.ak }}">
+						<input class="bulma-input bulma-is-small" type="text" name="ak" value="{{ data.config.ak }}">
 					</div>
 				</div>
 				<div class="bulma-field">
-					<label for="s3_secret" class="label is-small">Secret Key</label>
+					<label for="s3_secret" class="bulma-label bulma-is-small">Secret Key</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="sk" value="{{ data.config.sk }}">
+						<input class="bulma-input bulma-is-small" type="text" name="sk" value="{{ data.config.sk }}">
 					</div>
 				</div>
 				<div class="bulma-field">
-					<label for="s3_secret" class="label is-small">域名</label>
+					<label for="s3_secret" class="bulma-label bulma-is-small">域名</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="domain" value="{{ data.config.domain }}">
+						<input class="bulma-input bulma-is-small" type="text" name="domain" value="{{ data.config.domain }}">
 					</div>
 				</div>
 				<div class="bulma-field">
-					<label for="endpoint" class="label is-small">S3 Endpoint</label>
+					<label for="endpoint" class="bulma-label bulma-is-small">S3 Endpoint</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="endpoint" value="{{ data.config.endpoint }}">
+						<input class="bulma-input bulma-is-small" type="text" name="endpoint" value="{{ data.config.endpoint }}">
 					</div>
 				</div>
 				<div class="bulma-field">
-					<label for="bucket" class="label is-small">桶名称</label>
+					<label for="bucket" class="bulma-label bulma-is-small">桶名称</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="bucket" value="{{ data.config.bucket }}">
+						<input class="bulma-input bulma-is-small" type="text" name="bucket" value="{{ data.config.bucket }}">
 					</div>
 				</div>
 				<div class="bulma-field">
-					<label for="suffix" class="label is-small">后缀</label>
+					<label for="suffix" class="bulma-label bulma-is-small">后缀</label>
 					<div class="bulma-control">
-						<input class="input is-small" type="text" name="suffix" value="{{ data.config.suffix }}">
+						<input class="bulma-input bulma-is-small" type="text" name="suffix" value="{{ data.config.suffix }}">
 					</div>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 
 		<div class="field my-2">
 			<div class="bulma-control">
-				<button class="button is-link is-small">
+				<button class="bulma-button bulma-is-link bulma-is-small">
 					<span>保存设置</span>
 				</button>
 			</div>

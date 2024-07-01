@@ -5,9 +5,9 @@
 
 	<form action="/user/doLogin" method="post" class="px-10 py-4">
 		<div class="bulma-field">
-			<label for="username" class="bulma-label">用户名</label>
+			<label for="username" class="bulma-label bulma-is-small">用户名</label>
 			<div class="bulma-control">
-				<input class="bulma-input" type="text" name="username" value="{{ data.username }}">
+				<input class="bulma-input bulma-is-small" type="text" name="username" value="{{ data.username }}">
 			</div>
 			{% if exception starts with '用户名' %}
 				<p class="bulma-help bulma-is-danger">{{ exception }}</p>
@@ -15,9 +15,9 @@
 		</div>
 
 		<div class="bulma-field">
-			<label for="password" class="bulma-label">密码</label>
+			<label for="password" class="bulma-label bulma-is-small">密码</label>
 			<div class="bulma-control">
-				<input class="bulma-input" type="password" name="password" value="{{ data.password }}">
+				<input class="bulma-input bulma-is-small" type="password" name="password" value="{{ data.password }}">
 			</div>
 			{% if exception starts with '密码' %}
 				<p class="bulma-help bulma-is-danger">{{ exception }}</p>
@@ -30,11 +30,11 @@
 
 		<div class="bulma-field bulma-is-grouped">
 			<div class="bulma-control">
-				<button class="bulma-button">
+				<button class="bulma-button bulma-is-link bulma-is-small">
 					<span>登录</span>
 				</button>
 
-				<a class="bulma-button" href="/user/reg">去注册</a>
+				<a class="bulma-button bulma-is-light bulma-is-small" href="/user/reg">去注册</a>
 			</div>
 
 		</div>

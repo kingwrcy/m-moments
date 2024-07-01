@@ -12,6 +12,26 @@
 {% endblock %}
 
 {% block afterScript %}
+	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+	<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+	/>
 	<script src="/js/main.js">
+	</script>
+
+	<script type="module">
+      // 指定确切的版本号
+      import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+
+      $("code[class^='language']").each(async function(){
+          const lang = $(this).attr('class').replaceAll("language-","")
+		      const code = $(this).text()
+          $(this).parent().replaceWith(await codeToHtml(code, {
+              lang: lang,
+              theme: 'nord'
+          }))
+      })
+
 	</script>
 {% endblock %}

@@ -15,16 +15,26 @@ html, body {
 [un-cloak] {
     display: none;
 }
-.toastui-editor-contents pre{
+
+a{
+    text-decoration: none;
+}
+.markdown-body img{
+    max-height: 300px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.markdown-body pre{
     border-radius: 5px !important;
     background-color: #f4f4f5 !important;
 }
-.toastui-editor-contents pre>code{
-    font-size:14px !important;
-    color:#71717a;
-}
+/*.markdown-body pre>code{*/
+/*    font-size:14px !important;*/
+/*    color:#71717a;*/
+/*}*/
 
-.toastui-editor-contents p>code{
+.markdown-body p>code,
+.markdown-body li>code{
     background-color:#64748b;
     color:white;
     padding:2px 6px;
@@ -32,9 +42,9 @@ html, body {
     border-radius: 4px;
     margin:0 2px;
 }
-.toastui-editor-contents a{
-    margin:0 3px !important;
-}
-.toastui-editor-contents a:hover{
-    text-decoration: none !important;
-}
+/*.markdown-body a{*/
+/*    margin:0 3px !important;*/
+/*}*/
+/*.markdown-body a:hover{*/
+/*    text-decoration: none !important;*/
+/*}*/

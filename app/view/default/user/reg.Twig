@@ -4,59 +4,59 @@
 	{% if  sysConfig.config.disable_register != "on" %}
 		<form action="/user/doReg" method="post" class="px-10 py-4">
 			<div class="bulma-field">
-				<label for="username" class="label">用户名</label>
+				<label for="username" class="bulma-label bulma-is-small">用户名</label>
 				<div class="bulma-control">
-					<input class="input" type="text" name="username" value="{{ data.username }}">
+					<input class="bulma-input bulma-is-small" type="text" name="username" value="{{ data.username }}">
 				</div>
 				{% if exception starts with '用户名' %}
-					<p class="help bulma-is-danger">{{ exception }}</p>
+					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
 			<div class="bulma-field">
-				<label for="password" class="label">密码</label>
+				<label for="password" class="bulma-label bulma-is-small">密码</label>
 				<div class="bulma-control">
-					<input class="input" type="password" name="password" value="{{ data.password }}">
+					<input class="bulma-input bulma-is-small" type="password" name="password" value="{{ data.password }}">
 				</div>
 				{% if exception starts with '密码' %}
-					<p class="help bulma-is-danger">{{ exception }}</p>
+					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
 			<div class="bulma-field">
-				<label for="repeatPassword" class="label">重复密码</label>
+				<label for="repeatPassword" class="bulma-label bulma-is-small">重复密码</label>
 				<div class="bulma-control">
-					<input class="input" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
+					<input class="bulma-input bulma-is-small" type="password" name="repeatPassword" value="{{ data.repeatPassword }}">
 				</div>
 				{% if exception starts with '重复密码' %}
-					<p class="help bulma-is-danger">{{ exception }}</p>
+					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 			</div>
 
 
 			<div class="bulma-field">
-				<label for="email" class="label">邮箱</label>
+				<label for="email" class="bulma-label bulma-is-small">邮箱</label>
 				<div class="bulma-control">
-					<input placeholder="会用来生成头像,请填写常用邮箱" class="input" type="text" name="email"
+					<input placeholder="会用来生成头像,请填写常用邮箱" class="bulma-input bulma-is-small" type="text" name="email"
 					       value="{{ data.email }}">
 				</div>
 				{% if exception starts with '邮箱' %}
-					<p class="help bulma-is-danger">{{ exception }}</p>
+					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
 				{% endif %}
 
 			</div>
 
 			{% if message %}
-				<div class="block has-text-success">{{ message }}</div>
+				<div class="bulma-block bulma-has-text-success">{{ message }}</div>
 			{% endif %}
 
-			<div class="field is-grouped">
+			<div class="bulma-field bulma-is-grouped">
 				<div class="bulma-control">
-					<button class="button is-link is-small">
+					<button class="bulma-button bulma-is-link bulma-is-small">
 						<span>注册用户</span>
 					</button>
 
-					<a class="button is-light is-small" href="/user/login">去登录</a>
+					<a class="bulma-button bulma-is-light bulma-is-small" href="/user/login">去登录</a>
 				</div>
 
 			</div>
