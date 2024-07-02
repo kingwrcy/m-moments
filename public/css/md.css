@@ -18,13 +18,13 @@
 .markdown-body ol{
     color: #595959;
     font-size: 14px;
-    line-height: 0.875rem;
+    line-height: 1.4rem;
     font-weight: 400;
 }
 
 /* 段落间距控制 */
 .markdown-body p + p {
-    margin-top: 14px;
+    margin-top: 12px;
 }
 
 /* 标题的通用设置 */
@@ -55,6 +55,13 @@
 /* 无序列表 */
 .markdown-body ul {
     list-style: disc outside;
+    margin-left: 2em;
+    margin-top: 1em;
+}
+
+/* 无序列表 */
+.markdown-body ol {
+    list-style: decimal outside;
     margin-left: 2em;
     margin-top: 1em;
 }
@@ -94,7 +101,6 @@
 /* 链接 */
 .markdown-body a {
     color: #036aca;
-    border-bottom: 1px solid rgba(3, 106, 202, 0.8);
     font-weight: 400;
     text-decoration: none;
 }
