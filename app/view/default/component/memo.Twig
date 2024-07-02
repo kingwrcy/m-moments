@@ -7,11 +7,13 @@
 			{{ memo.author.nickname }}
 		</a>
 
-		<div class="text-wrap break-all line-clamp-10 max-h-[400px] overflow-hidden markdown-body" data-content="">
-			{{ memo.content|raw }}
+		<div class="text-wrap break-all max-h-[400px] overflow-hidden markdown-body" data-content="{{ memo.id }}">
+			{{ memo.content_html|raw }}
 		</div>
 
-		<div class="flex justify-between relative items-center">
+		<div class="text-sm hidden text-[#576b95] cursor-pointer my-2" data-show-all="{{ memo.id }}">全文</div>
+
+		<div class="flex justify-between relative items-center mt-2">
 				<span class="text-gray text-xs text-[#9DA4B0]">
 					{{ memo.author.created_at|timeAgo }}
 				</span>
@@ -84,6 +86,7 @@
 				</div>
 			{% endif %}
 		</div>
+
 
 		<div data-comment-area="{{ memo.id }}"
 		     class="rounded bottom-shadow bg-[#f7f7f7] dark:bg-[#202020]  flex-col gap-1 my-2 px-4 py-2 {{ (memo.fav_count == 0 and memo.comments is empty) ? 'hidden' :'flex' }}">

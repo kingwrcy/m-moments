@@ -2,8 +2,8 @@
     font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif !important;
 }
 
-:root{
-    --bulma-body-font-size:14px;
+:root {
+    --bulma-body-font-size: 14px;
 }
 
 html, body {
@@ -12,39 +12,45 @@ html, body {
     padding: 0;
 }
 
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color:white;
+}
+
 [un-cloak] {
     display: none;
 }
 
-a{
+a {
     text-decoration: none;
 }
-.markdown-body img{
+
+.markdown-body {
+    font-size: 14px !important;
+}
+
+.markdown-body img {
     max-height: 300px;
     border-radius: 5px;
     cursor: pointer;
 }
-.markdown-body pre{
-    border-radius: 5px !important;
-    background-color: #f4f4f5 !important;
-}
-/*.markdown-body pre>code{*/
-/*    font-size:14px !important;*/
-/*    color:#71717a;*/
-/*}*/
 
-.markdown-body p>code,
-.markdown-body li>code{
-    background-color:#64748b;
-    color:white;
-    padding:2px 6px;
-    border:1px solid #ccc;
-    border-radius: 4px;
-    margin:0 2px;
+.markdown-body pre {
+    border-radius: 5px !important;
+    margin: 10px 0 !important;
 }
-/*.markdown-body a{*/
-/*    margin:0 3px !important;*/
-/*}*/
-/*.markdown-body a:hover{*/
-/*    text-decoration: none !important;*/
-/*}*/
+
+
+.markdown-body p > code,
+.markdown-body li > code {
+    background-color: #64748b;
+    color: white;
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 2px;
+}

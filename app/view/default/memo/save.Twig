@@ -5,7 +5,7 @@
 	<div class="p-2">
 		<form action="/memo/save" method="post" id="saveForm">
 			<input type="hidden" name="id" value="{{ data.id }}">
-			<input type="hidden" name="content"/>
+			<input type="hidden" name="contentHtml"/>
 			<div class="flex gap-2 my-2" id="toolbar">
 				<div class="w-5 h-5 cursor-pointer " title="粗体" id="bold">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7z"></path><path d="M13 12h1a3.5 3.5 0 0 1 0 7H7v-7"></path></g></svg>
@@ -37,7 +37,7 @@
 			</div>
 			<div class="bulma-field">
 				<div class="bulma-control">
-					<textarea class="bulma-textarea bulma-is-small" style="height:300px;" id="contentMD" placeholder="支持markdown语法"></textarea>
+					<textarea class="bulma-textarea bulma-is-small" style="height:300px;" id="contentMD" name="contentMD" placeholder="支持markdown语法">{{ data.content_md }}</textarea>
 				</div>
 				{% if exception starts with '内容' %}
 					<p class="bulma-help bulma-is-danger">{{ exception }}</p>
@@ -70,7 +70,7 @@
       const $contentMD = $("#contentMD")
 
       $contentMD.on('input',function(){
-        $("input[name='content']").val(md.render($contentMD.val()));
+        $("input[name='contentHtml']").val(md.render($contentMD.val()));
       })
 
 

@@ -55,7 +55,7 @@ class MemoController {
 			$memo->increment('fav_count');
 		}
 		$memo->refresh();
-		return json(['fav_count' => $memo->fav_count,'like_persons' => $memo->likes->take(5)->map(function ($item) {
+		return json(['fav_count' => $memo->fav_count, 'like_persons' => $memo->likes->take(5)->map(function ($item) {
 			return $item->author->nickname;
 		})->join(",")]);
 	}
@@ -86,8 +86,9 @@ class MemoController {
 
 	public function save(Request $request): Response {
 		$session = $request->session();
-		$content = $request->post('content');
-		if (strlen(trim($content)) == 0) {
+		$contentHtml = $request->post('contentHtml');
+		$contentMD = $request->post('contentMD');
+		if (strlen(trim($contentHtml)) == 0) {
 			return view('default/memo/save', [
 				'exception' => '内容不能为空',
 				'data' => $request->post()
@@ -100,7 +101,8 @@ class MemoController {
 			'user_id' => $session->get('user')->id,
 			'pinned' => false,
 			'permission' => 0,
-			'content' => trim(str_replace("<br/>", "", $content)),
+			'content_html' => trim(str_replace("<br/>", "", $contentHtml)),
+			'content_md' => trim($contentMD),
 		];
 		$id = $request->post('id');
 		if ($id) {

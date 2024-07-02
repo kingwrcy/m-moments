@@ -88,7 +88,7 @@ $(function () {
     setTimeout(() => {
         $(".markdown-body pre code").each(function () {
             const $pre = $(this).parent()
-            const copyBtn = $(`<button class="cursor-pointer text-xs px-2 py-1 shadow top-2 right-2 absolute bg-white rounded hidden">复制</button>`)
+            const copyBtn = $(`<button style="position: absolute !important;display: none;" class="right-2 top-2 bulma-button bulma-is-small ">复制</button>`)
             $pre.css("position", "relative")
             $pre.append(copyBtn).hover(()=>{
                 copyBtn.removeClass('text-gray-300').text('复制').toggle()
@@ -98,5 +98,34 @@ $(function () {
                 copyToClipboard($pre.find("code").text())
             })
         })
-    }, 1000)
+
+        const maxHeight = 400
+        const maxHeightClass = `max-h-[${maxHeight}px]`
+
+        $("div[data-content]").each(function(){
+            const showAllBtn = $("div[data-show-all='"+$(this).data('content')+"']")
+            const contentDiv = $(this)
+            // 检查是否有垂直滚动条
+            if (contentDiv[0].scrollHeight > maxHeight) {
+                showAllBtn.show(); // 如果有滚动条，则显示“全部”按钮
+            } else {
+                showAllBtn.hide(); // 如果没有滚动条，则隐藏“全部”按钮
+            }
+
+            // 监听“全部”按钮的点击事件
+            showAllBtn.click(function() {
+                contentDiv.toggleClass(maxHeightClass)
+                if (contentDiv.hasClass(maxHeightClass)){
+                    showAllBtn.text('收起')
+                }else{
+                    showAllBtn.text('全文')
+                }
+            });
+        })
+    }, 300)
+
+
+
+
+
 })
