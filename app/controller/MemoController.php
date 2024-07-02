@@ -5,59 +5,74 @@ namespace app\controller;
 use app\model\Comment;
 use app\model\Like;
 use app\model\Memo;
+use app\model\SysConfig;
 use support\Request;
 use support\Response;
 
 class MemoController {
 
-	protected $noNeedLogin = [];
+	protected $noNeedLogin = ['like', 'comment'];
 
 
 	public function comment(Request $request, $id): Response {
+		$sysConfig = SysConfig::find(1);
 		$currentUser = session('user');
-		$memo = Memo::find($id);
-		if (!$memo) {
-			return response("not found");
+		if ($currentUser || $sysConfig->config['anonymous_comment'] == "on") {
+			$memo = Memo::find($id);
+			if (!$memo) {
+				return response("not found");
+			}
+			$data = $request->post();
+			$content = $data['content'];
+			$uid = $currentUser ? $currentUser->id : null;
+			if (strlen(trim($content)) == 0) {
+				return response("评论不能为空");
+			}
+			Comment::create([
+				'user_id' => $uid,
+				'memo_id' => $id,
+				'content' => $content,
+				'username' => $request->post('username') ?: '匿名',
+				'email' => $request->post('email', ''),
+				'website' => $request->post('website', ''),
+				'reply_user_id' => $request->post('reply_user_id'),
+				'reply_username' => $request->post('reply_username', ''),
+			]);
+			$memo->increment('comment_count');
+			$memo->save();
+			return redirect("/");
 		}
-		$data = $request->post();
-		$content = $data['content'];
-		$uid = $currentUser->id;
-		if (strlen(trim($content)) == 0) {
-			return response("评论不能为空");
-		}
-		Comment::create([
-			'user_id' => $uid,
-			'memo_id' => $id,
-			'content' => $content,
-			'username' => $request->post('username', ''),
-			'email' => $request->post('email', ''),
-			'website' => $request->post('website', ''),
-			'reply_user_id' => $request->post('reply_user_id'),
-			'reply_username' => $request->post('reply_username', ''),
-		]);
-		$memo->increment('comment_count');
-		$memo->save();
-		return redirect("/");
+		return redirect("/user/login");
 	}
 
 	public function like(Request $request, $id): Response {
+		$sysConfig = SysConfig::find(1);
 		$currentUser = session('user');
-		$memo = Memo::find($id);
-		if ($memo->author->id === $currentUser->id) {
-			return json(['fav_count' => $memo->fav_count]);
+		if ($currentUser || $sysConfig->config['anonymous_comment'] == "on") {
+			$memo = Memo::find($id);
+
+			if ($currentUser) {
+				if ($memo->author->id === $currentUser->id) {
+					return json(['fav_count' => $memo->fav_count]);
+				}
+				if (Like::where('user_id', $currentUser->id)
+						->where('memo_id', $id)->count() == 0) {
+					Like::create([
+						'user_id' => $currentUser->id,
+						'memo_id' => $id,
+					]);
+					$memo->increment('fav_count');
+				}
+			} else {
+				$memo->increment('fav_count');
+			}
+
+			$memo->refresh();
+			return json(['fav_count' => $memo->fav_count, 'like_persons' => $memo->likes->take(5)->map(function ($item) {
+				return $item->author->nickname;
+			})->join(",")]);
 		}
-		if (Like::where('user_id', $currentUser->id)
-				->where('memo_id', $id)->count() == 0) {
-			Like::create([
-				'user_id' => $currentUser->id,
-				'memo_id' => $id,
-			]);
-			$memo->increment('fav_count');
-		}
-		$memo->refresh();
-		return json(['fav_count' => $memo->fav_count, 'like_persons' => $memo->likes->take(5)->map(function ($item) {
-			return $item->author->nickname;
-		})->join(",")]);
+		return redirect("/user/login");
 	}
 
 	public function remove(Request $request, $id): Response {

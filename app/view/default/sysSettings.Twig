@@ -31,6 +31,13 @@
 			</label>
 		</div>
 
+		<div class="bulma-field text-xs">
+			<label class="checkbox  items-center gap-2" style="display: flex !important;">
+				<input type="checkbox" class="bulma-is-small" name="anonymous_comment" {{ data.config.anonymous_comment == "on" ? 'checked' : '' }}/>
+				<span class="font-bold ">开启匿名点赞/评论</span>
+			</label>
+		</div>
+
 		<div class="bulma-field">
 			<label for="css" class="bulma-label bulma-is-small">自定义CSS</label>
 			<div class="bulma-control">

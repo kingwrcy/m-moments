@@ -32,6 +32,7 @@ class IndexController {
 				'bucket' => $data['bucket'],
 				'suffix' => $data['suffix'],
 				'disable_register' => $data['disable_register'] ?? "off",
+				'anonymous_comment' => $data['anonymous_comment'] ?? "off",
 			],
 		];
 		SysConfig::find(1)->update($config);
@@ -67,7 +68,8 @@ class IndexController {
 
 			return view('default/user/mine', [
 				'memos' => $memos,
-				'user' => $user
+				'user' => $user,
+				'sysConfig' => SysConfig::find(1),
 			]);
 		}
 

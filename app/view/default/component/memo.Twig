@@ -17,7 +17,7 @@
 				<span class="text-gray text-xs text-[#9DA4B0]">
 					{{ memo.author.created_at|timeAgo }}
 				</span>
-			{% if currentUser %}
+			{% if currentUser or  sysConfig.config.anonymous_comment == 'on' %}
 				<div data-trigger
 				     class="toolbar-icon px-2 py-1 bg-[#f7f7f7] dark:bg-slate-700 hover:bg-[#dedede] cursor-pointer rounded flex items-center justify-center"
 				>
@@ -37,10 +37,10 @@
 								<path
 										d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
 							</svg>
-							<button type="submit">点赞</button>
+							<button type="submit" class="cursor-pointer">点赞</button>
 						</form>
-
 						<span class="bg-[#6b7280] h-[20px] w-[1px]"></span>
+
 						<div class="flex flex-row gap-1 cursor-pointer items-center" data-trigger-comment="{{ memo.id }}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
 							     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -105,15 +105,17 @@
 					{% endfor %}</span> 等<span class="fav_count">{{ memo.fav_count }}</span>人点赞
 				</div>
 			</div>
-			{% if currentUser %}
+			{% if currentUser or sysConfig.config.anonymous_comment == 'on' %}
 				<form class="gap-4 flex-col mt-4 hidden" data-comment-box="{{ memo.id }}" method="post"
 				      action="/memo/comment/{{ memo.id }}">
-					<textarea class="textarea is-small" name="content" placeholder="友好发言!"></textarea>
+					<textarea class="bulma-textarea bulma-is-small" name="content" placeholder="友好发言!"></textarea>
 					<div class="flex flex-row gap-2">
-{#						<input class="input is-small" name="username" placeholder="昵称"/>#}
-{#						<input class="input is-small" name="email" placeholder="邮箱"/>#}
-{#						<input class="input is-small" name="website" placeholder="网站"/>#}
-						<button class="button is-small" type="submit">评论</button>
+						{% if not currentUser %}
+							<input class="bulma-input bulma-is-small" name="username" placeholder="昵称"/>
+							<input class="bulma-input bulma-is-small" name="email" placeholder="邮箱"/>
+							<input class="bulma-input bulma-is-small" name="website" placeholder="网站"/>
+						{% endif %}
+						<button class="bulma-button bulma-is-small" type="submit">评论</button>
 					</div>
 				</form>
 			{% endif %}
@@ -123,7 +125,7 @@
 					{% for comment in memo.comments %}
 						<div class="no-wrap" data-trigger-comment="{{ memo.id~'x'~comment.id }}">
 							<img
-									src="{{ comment.author.avatar_url ?: 'https://avatars.tzador.com/face?size=60&id=604080dfb-e4f5-432f-9b7a-a9442a0dcd74' }}"
+									src="{{ comment.author.avatar_url ?: 'https://gravatar.cooluc.com/avatar/a6be49ffca8b282e268e41c555d6c61b5b2c4e5b8aa895bf12822556ac2f171f' }}"
 									alt=""
 									class="avatar w-5 h-5 rounded mr-2 vertical-top">
 							<span
@@ -137,31 +139,30 @@
 								<span class="text-[#576b95] dark:text-white">{{ comment.reply_username }}</span>
 							{% endif %}
 							<span>:</span>
-							<span class="dark:text-white {{ currentUser? 'cursor-pointer':''}}">{{ comment.content }}</span>
+							<span class="dark:text-white {{ currentUser? 'cursor-pointer':'' }}">{{ comment.content }}</span>
 							<span class="text-sm text-gray-400 text-xs">{{ comment.created_at|timeAgo }}</span>
 						</div>
-						{% if currentUser %}
-						<form class="gap-4 flex-col hidden" data-comment-box="{{ memo.id~'x'~comment.id }}" method="post"
-						      action="/memo/comment/{{ memo.id }}">
-							<input type="hidden" name="reply_user_id" value="{{ comment.author.id ?: 0 }}">
-							<input type="hidden" name="reply_username" value="{{ comment.author.nickname ?: comment.username }}">
-							<textarea class="textarea is-small" name="content"
-							          placeholder="回复给@{{ comment.author.nickname ?: comment.username }}"></textarea>
-							<div class="flex flex-row gap-2">
-{#								{% if not currentUser %}#}
-{#									<input class="input is-small" name="username" placeholder="昵称"/>#}
-{#									<input class="input is-small" name="email" placeholder="邮箱"/>#}
-{#									<input class="input is-small" name="website" placeholder="网站"/>#}
-{#								{% endif %}#}
-								<button class="button is-small" type="submit">评论</button>
-							</div>
-						</form>
+						{% if currentUser or  sysConfig.config.anonymous_comment == 'on' %}
+							<form class="gap-4 flex-col hidden" data-comment-box="{{ memo.id~'x'~comment.id }}" method="post"
+							      action="/memo/comment/{{ memo.id }}">
+								<input type="hidden" name="reply_user_id" value="{{ comment.author.id ?: 0 }}">
+								<input type="hidden" name="reply_username" value="{{ comment.author.nickname ?: comment.username }}">
+								<textarea class="bulma-textarea bulma-is-small" name="content"
+								          placeholder="回复给@{{ comment.author.nickname ?: comment.username }}"></textarea>
+								<div class="flex flex-row gap-2">
+									{% if not currentUser %}
+										<input class="bulma-input bulma-is-small" name="username" placeholder="昵称"/>
+										<input class="bulma-input bulma-is-small" name="email" placeholder="邮箱"/>
+										<input class="bulma-input bulma-is-small" name="website" placeholder="网站"/>
+									{% endif %}
+									<button class="bulma-button bulma-is-small" type="submit">评论</button>
+								</div>
+							</form>
 						{% endif %}
 					{% endfor %}
 				</div>
 			{% endif %}
 		</div>
-
 	</div>
 </div>
 
