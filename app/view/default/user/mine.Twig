@@ -1,5 +1,5 @@
 {% extends 'default/layout/base.Twig' %}
-{% block title %} {{user.nickname}}-个人主页 {% endblock %}
+{% block title %} {{ user.nickname }}-个人主页 {% endblock %}
 
 {% block content %}
 	<div class="header relative mb-8"><img class="header-img w-full"
@@ -25,8 +25,24 @@
 {% endblock %}
 
 {% block afterScript %}
-	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
-	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css"/>
-	<script src="/js/main.js">
+	<script src="https://cdn.mblog.club/mm/fancybox.umd.js"></script>
+	<link
+			rel="stylesheet"
+			href="https://cdn.mblog.club/mm/fancybox.css"
+	/>
+	<script src="/js/main.js"></script>
+	<script type="module">
+    import {codeToHtml} from 'https://esm.sh/shiki@1.0.0'
+
+    $("code[class^='language']").each(async function () {
+      const lang = $(this).attr('class').replaceAll("language-", "")
+      const code = $(this).text()
+      $(this).parent().replaceWith(await codeToHtml(code, {
+        lang: lang,
+        theme: 'catppuccin-macchiato'
+      }))
+    })
+
 	</script>
+
 {% endblock %}
