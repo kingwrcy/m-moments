@@ -5,10 +5,10 @@
 	<div class="header relative mb-8"><img class="header-img w-full"
 	                                       src="{{ user.cover_url }}"
 	                                       alt="">
-		<div class="absolute right-2 bottom-[-40px]">
+		<div class="absolute right-2 bottom-[-20px]">
 			<div class="userinfo flex flex-col">
 				<div class="flex flex-row items-center gap-4 justify-end">
-					<div class="username text-lg font-bold text-white">Jerry</div>
+					<div class="username text-lg font-bold text-white">{{ user.nickname }}</div>
 					<img src="{{ user.avatar_url }}"
 					     class="avatar w-[70px] h-[70px] rounded-xl"></div>
 				<div class="slogan text-gray truncate w-full text-end text-xs mt-2">{{ user.slogan }}</div>

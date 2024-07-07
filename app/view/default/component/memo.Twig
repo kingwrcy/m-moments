@@ -15,7 +15,7 @@
 
 		<div class="flex justify-between relative items-center mt-2">
 				<span class="text-gray text-xs text-[#9DA4B0]">
-					{{ memo.author.created_at|timeAgo }}
+					{{ memo.created_at|timeAgo }}
 				</span>
 			{% if currentUser or  sysConfig.config.anonymous_comment == 'on' %}
 				<div data-trigger
