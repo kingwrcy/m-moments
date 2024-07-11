@@ -5,13 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %} {% endblock %}</title>
 	<link rel="shortcut icon" type="image/png" href="{{ sysConfig.favicon }}">
-	<script src="https://cdn.mblog.club/mm/unocss.min.js"></script>
-	<script src="https://cdn.mblog.club/mm/jquery.min.js"></script>
-	<script src="https://cdn.mblog.club/mm/jquery.form.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.mblog.club/mm/bulma.min.css">
+	<script src="{{ getStaticPath('/js/unocss.min.js') }}"></script>
+	<script src="{{ getStaticPath('/js/jquery.min.js') }}"></script>
+	<script src="{{ getStaticPath('/js/jquery.form.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ getStaticPath('/css/bulma.min.css') }}">
 	{% include 'default/layout/header.Twig' %}
-	<link rel="stylesheet" href="/css/main.css">
-	<link rel="stylesheet" href="/css/md.css">
+	<link rel="stylesheet" href="{{ getStaticPath('/css/main.css') }}">
+	<link rel="stylesheet" href="{{ getStaticPath('/css/md.css') }}">
 	{% block beforeScript %} {% endblock %}
 	{% if currentUser and currentUser.config.css %}
 		<style>

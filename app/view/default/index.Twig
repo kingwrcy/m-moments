@@ -12,12 +12,12 @@
 {% endblock %}
 
 {% block afterScript %}
-	<script src="https://cdn.mblog.club/mm/fancybox.umd.js"></script>
+	<script src="{{ getStaticPath('/js/fancybox.umd.js') }}"></script>
 	<link
 			rel="stylesheet"
-			href="https://cdn.mblog.club/mm/fancybox.css"
+			href="{{ getStaticPath('/css/fancybox.css') }}"
 	/>
-	<script src="/js/main.js">
+	<script src="{{ getStaticPath('/js/main.js') }}">
 	</script>
 
 	<script type="module">

@@ -35,7 +35,12 @@ class IndexController {
 				'anonymous_comment' => $data['anonymous_comment'] ?? "off",
 			],
 		];
-		SysConfig::find(1)->update($config);
+		$exist = SysConfig::find(1);
+		if ($exist) {
+			$exist->update($config);
+		} else {
+			SysConfig::create($config);
+		}
 		return redirect("/settings");
 	}
 
@@ -51,7 +56,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
-            'sysConfig' => SysConfig::find(1)
+			'sysConfig' => SysConfig::find(1)
 		]);
 	}
 
@@ -80,7 +85,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
-            'sysConfig' => SysConfig::find(1)
+			'sysConfig' => SysConfig::find(1)
 		]);
 	}
 
@@ -94,7 +99,7 @@ class IndexController {
 
 		return view('default/index', [
 			'memos' => $memos,
-            'sysConfig' => SysConfig::find(1)
+			'sysConfig' => SysConfig::find(1)
 		]);
 	}
 

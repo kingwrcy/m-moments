@@ -58,8 +58,8 @@
 {% endblock %}
 
 {% block beforeScript %}
-	<script src="https://cdn.mblog.club/mm/markdown-it.min.js"></script>
-	<script src="https://cdn.mblog.club/mm/textarea.min.js"></script>
+	<script src="{{ getStaticPath('/js/markdown-it.min.js') }}"></script>
+	<script src="{{ getStaticPath('/js/textarea.min.js')}}"></script>
 {% endblock %}
 
 {% block afterScript %}

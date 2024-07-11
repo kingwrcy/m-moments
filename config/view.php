@@ -9,8 +9,10 @@ use Twig\TwigFilter;
 return [
 	'handler' => Twig::class,
 	'extension' => function (Environment $twig) {
-//		$twig->addExtension(new CustomRawFilterExtension());
 		$twig->addFilter(new TwigFilter('timeAgo', 'timeAgo'));
+		$twig->addFunction(new \Twig\TwigFunction('getStaticPath', function (string $path) {
+			return (getenv("STATIC_ASSET_CDN") ?? '') . $path;
+		}));
 	},
 	'options' => [
 		'debug' => true,
