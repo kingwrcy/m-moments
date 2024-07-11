@@ -1,15 +1,35 @@
-version: "3.7"
+version: '3.8'
 
 services:
-  m-moments:
-    image: kingwrcy/m-moments:latest
-    ports:
-      - "37212:8787"
+  db:
+    image: postgres:14-alpine
+    restart: always
     environment:
-      - DB_HOST=postgres
+      POSTGRES_USER: m-moments
+      POSTGRES_PASSWORD: m-moments
+      POSTGRES_DB: m-moments
+    networks:
+      - moments_network
+    volumes:
+      - ./data:/var/lib/postgresql/data/
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/init.sql
+  web:
+    image: kingwrcy/m-moments:latest
+    restart: always
+    environment:
+      - DB_HOST=db
       - DB_PORT=5432
       - DB_NAME=m-moments
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_USER=m-moments
+      - DB_PASSWORD=m-moments
+    networks:
+      - moments_network
+    ports:
+      - '8787:8787'
+    depends_on:
+      - db
     volumes:
-      - ./m-moments:/app/upload
+      - ./upload:/app/upload
+
+networks:
+  moments_network:
