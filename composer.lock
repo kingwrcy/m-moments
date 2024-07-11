@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a35c6153bb29bc37bfce153da89cd2e",
+    "content-hash": "3659d5e5b7c3ef8ead8b075567cc9ae9",
     "packages": [
         {
             "name": "brick/math",
@@ -2636,6 +2636,43 @@
             "time": "2022-03-08T17:03:00+00:00"
         },
         {
+            "name": "webman-tech/docker",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-tech/docker.git",
+                "reference": "fc84af77061f25c47539c92b702a6367ba3040e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-tech/docker/zipball/fc84af77061f25c47539c92b702a6367ba3040e9",
+                "reference": "fc84af77061f25c47539c92b702a6367ba3040e9",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kriss\\WebmanDocker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "docker for webman app",
+            "support": {
+                "issues": "https://github.com/webman-tech/docker/issues",
+                "source": "https://github.com/webman-tech/docker/tree/v2.3.0"
+            },
+            "time": "2023-02-27T07:03:19+00:00"
+        },
+        {
             "name": "workerman/validation",
             "version": "v3.1.2",
             "source": {
@@ -2853,7 +2890,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "ext-fileinfo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

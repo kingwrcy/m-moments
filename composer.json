@@ -34,7 +34,8 @@
     "twig/twig": "^3.10",
     "workerman/validation": "^3.1",
     "vlucas/phpdotenv": "^5.5",
-    "ext-fileinfo": "*"
+    "ext-fileinfo": "*",
+    "webman-tech/docker": "^2.3"
   },
   "suggest": {
     "ext-event": "For better performance. "
