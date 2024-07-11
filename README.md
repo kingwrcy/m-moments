@@ -8,6 +8,8 @@
 
 ## 部署
 
+[镜像地址](https://hub.docker.com/repository/docker/kingwrcy/m-moments/)
+
 1. 新增postgres数据库`m-moments`,执行`schema.sql`文件初始化数据库.
 2. 修改根目录下的`docker-compose.yml`文件里的数据库部分,然后使用`docker-compose up -d`一键启动.
 3. docker容器里的`/app/upload`目录则是上传的图片目录,需要映射出来,目前只支持上传头像,发言里的图片暂不支持上传.
