@@ -7,8 +7,10 @@
 3. 支持注册用户
 
 ## 部署
+
 1. 新增postgres数据库`m-moments`,执行`schema.sql`文件初始化数据库.
 2. 修改根目录下的`docker-compose.yml`文件里的数据库部分,然后使用`docker-compose up -d`一键启动.
+3. docker容器里的`/app/upload`目录则是上传的图片目录,需要映射出来,目前只支持上传头像,发言里的图片暂不支持上传.
 
 ## 本地开发
 
@@ -29,3 +31,10 @@ DEFAULT_USER_AVATAR_CDN=https://gravatar.cooluc.com/avatar/
 ```
 
 5. 执行`php start.php start`启动服务
+
+## 支持的环境变量
+
+| 变量名                     | 说明            | 默认值                                          |
+|-------------------------|---------------|----------------------------------------------|
+| DEFAULT_USER_AVATAR_CDN | 用户头像的avatar镜像 | https://gravatar.cooluc.com/avatar/          |
+| STATIC_ASSET_CDN        | 静态资源cdn前缀     | 无,读取本地,使用的话需要把项目根目录的`public`文件夹底下的所有文件上传到CDN |
