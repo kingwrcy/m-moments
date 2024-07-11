@@ -6,7 +6,7 @@ FROM krisss/docker-webman:$WEBMAN_DOCKER_VERSION
 
 # 增加额外的扩展
 #RUN apk add --no-cache git
-RUN install-php-extensions pgsql
+RUN install-php-extensions pgsql pdo_pgsql
 
 # 设置配置文件
 # 自定义 php 配置文件，如果需要的话
@@ -27,6 +27,9 @@ RUN composer install --no-interaction --no-dev --no-autoloader --no-scripts
 
 # 复制项目代码
 COPY . /app
+
+ENV UPLOAD_DIR /app/upload
+ENV DEFAULT_USER_AVATAR_CDN https://gravatar.cooluc.com/avatar/
 
 # 执行 Composer 自动加载和相关脚本
 RUN composer install --no-interaction --no-dev && composer dump-autoload

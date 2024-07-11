@@ -1,59 +1,31 @@
-<div style="padding:18px;max-width: 1024px;margin:0 auto;background-color:#fff;color:#333">
-<h1>webman</h1>
+## 极简微博 - 多人版的[极简朋友圈](https://m.mblog.club)
 
-基于<a href="https://www.workerman.net" target="__blank">workerman</a>开发的超高性能PHP框架
+目前功能比较简单
 
+1. 支持markdown语法
+2. 支持点赞/评论
+3. 支持注册用户
 
-<h1>学习</h1>
+## 部署
+1. 新增postgres数据库`m-moments`,执行`schema.sql`文件初始化数据库.
+2. 修改根目录下的`docker-compose.yml`文件里的数据库部分,然后使用`docker-compose up -d`一键启动.
 
-<ul>
-  <li>
-    <a href="https://www.workerman.net/webman" target="__blank">主页 / Home page</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/doc/webman" target="__blank">文档 / Document</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/doc/webman/install.html" target="__blank">安装 / Install</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/questions" target="__blank">问答 / Questions</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/apps" target="__blank">市场 / Apps</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/sponsor" target="__blank">赞助 / Sponsors</a>
-  </li>
-  <li>
-    <a href="https://www.workerman.net/doc/webman/thanks.html" target="__blank">致谢 / Thanks</a>
-  </li>
-</ul>
+## 本地开发
 
-<div style="float:left;padding-bottom:30px;">
+1. 克隆本项目到本地.
+2. 提前安装好php和postgres环境,注意php需要安装`pgsql`和`pdo_pgsql`扩展.
+3. 执行`composer install`安装依赖.
+4. 新建`.env`文件,内容如下:
 
-  <h1>赞助商</h1>
+```shell
+DB_HOST=postgres
+DB_PORT=5432
+DB_NAME=m-moments
+DB_USER=postgres
+DB_PASSWORD=postgres
+#图片上传目录
+UPLOAD_DIR=/opt/moments/upload
+DEFAULT_USER_AVATAR_CDN=https://gravatar.cooluc.com/avatar/
+```
 
-  <h4>特别赞助</h4>
-  <a href="https://www.crmeb.com/?form=workerman" target="__blank">
-    <img src="https://www.workerman.net/img/sponsors/6429/20230719111500.svg" width="200">
-  </a>
-
-  <h4>铂金赞助</h4>
-  <a href="https://www.fadetask.com/?from=workerman" target="__blank"><img src="https://www.workerman.net/img/sponsors/1/20230719084316.png" width="200"></a>
-  <a href="https://www.yilianyun.net/?from=workerman" target="__blank" style="margin-left:20px;"><img src="https://www.workerman.net/img/sponsors/6218/20230720114049.png" width="200"></a>
-
-  <h4>金牌赞助</h4>
-
-
-</div>
-
-
-<div style="clear: both">
-<h1>LICENSE</h1>
-The webman is open-sourced software licensed under the MIT.
-</div>
-
-</div>
-
-
+5. 执行`php start.php start`启动服务

@@ -1,10 +1,15 @@
-# 用于开发环境
 version: "3.7"
 
 services:
-  webman:
-    image: krisss/docker-webman:${DOCKER_WEBMAN_VERSION:-8.2-cli-alpine}
+  m-moments:
+    image: kingwrcy/m-moments:latest
     ports:
-      - "${DOCKER_WEBMAN_PORT:-8787}:8787"
+      - "37212:8787"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=m-moments
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
     volumes:
-      - .:/app
+      - ./m-moments:/app/upload

@@ -35,7 +35,8 @@
     "workerman/validation": "^3.1",
     "vlucas/phpdotenv": "^5.5",
     "ext-fileinfo": "*",
-    "webman-tech/docker": "^2.3"
+    "webman-tech/docker": "^2.3",
+    "robmorgan/phinx": "^0.16.1"
   },
   "suggest": {
     "ext-event": "For better performance. "

@@ -15,7 +15,7 @@ class UploadController {
 		// 文件的绝对路径
 		$filePath = getenv("UPLOAD_DIR") . '/' . $file;
 
-// 检查文件是否存在
+		// 检查文件是否存在
 		if (file_exists($filePath)) {
 			// 获取文件的 MIME 类型
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
